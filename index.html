@@ -10,7 +10,6 @@
       --bg2: #0f172a;
       --panel: rgba(15, 23, 42, 0.82);
       --card: rgba(30, 41, 59, 0.88);
-      --soft: rgba(51, 65, 85, 0.45);
       --border: rgba(148, 163, 184, 0.22);
       --text: #f8fafc;
       --muted: #cbd5e1;
@@ -21,8 +20,10 @@
       --danger: #ef4444;
       --danger2: #b91c1c;
       --warning: #f59e0b;
+      --warning2: #d97706;
+      --secondary1: #64748b;
+      --secondary2: #475569;
       --shadow: 0 22px 55px rgba(0, 0, 0, 0.35);
-      --radius: 20px;
     }
 
     * { box-sizing: border-box; }
@@ -39,46 +40,35 @@
         linear-gradient(135deg, var(--bg1), var(--bg2) 45%, #111827);
     }
 
-    body {
-      min-height: 100vh;
-    }
-
     .container {
-      width: min(1200px, calc(100% - 28px));
+      width: min(1240px, calc(100% - 28px));
       margin: 0 auto;
       padding: 24px 0 56px;
     }
 
     .topbar {
       display: flex;
-      gap: 16px;
       justify-content: space-between;
       align-items: center;
+      gap: 16px;
       padding: 18px 20px;
       border-radius: 24px;
       background: var(--panel);
       border: 1px solid var(--border);
-      backdrop-filter: blur(14px);
       box-shadow: var(--shadow);
+      backdrop-filter: blur(14px);
       position: sticky;
       top: 12px;
       z-index: 20;
     }
 
-    .brand {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
     .brand h1 {
       margin: 0;
-      font-size: clamp(1.6rem, 4vw, 2.8rem);
-      letter-spacing: 0.02em;
+      font-size: clamp(1.7rem, 4vw, 2.8rem);
     }
 
     .brand p {
-      margin: 0;
+      margin: 6px 0 0;
       color: var(--muted);
       font-size: 0.95rem;
     }
@@ -87,14 +77,14 @@
       position: relative;
     }
 
-    .menu-btn, .btn, .small-btn, .icon-btn {
+    .menu-btn, .btn, .small-btn, .icon-btn, .close-btn {
       border: none;
       color: #fff;
       cursor: pointer;
       transition: transform .15s ease, opacity .15s ease, background .2s ease;
     }
 
-    .menu-btn:hover, .btn:hover, .small-btn:hover, .icon-btn:hover {
+    .menu-btn:hover, .btn:hover, .small-btn:hover, .icon-btn:hover, .close-btn:hover {
       transform: translateY(-1px);
       opacity: .96;
     }
@@ -104,7 +94,6 @@
       padding: 12px 18px;
       font-weight: 700;
       background: linear-gradient(135deg, var(--accent), var(--accent2));
-      box-shadow: 0 10px 24px rgba(37, 99, 235, 0.25);
     }
 
     .dropdown {
@@ -121,9 +110,7 @@
       backdrop-filter: blur(14px);
     }
 
-    .dropdown.open {
-      display: block;
-    }
+    .dropdown.open { display: block; }
 
     .dropdown h3 {
       margin: 4px 8px 10px;
@@ -151,7 +138,6 @@
 
     .menu-item:hover {
       border-color: var(--accent);
-      background: rgba(30, 41, 59, 1);
     }
 
     .panel {
@@ -197,9 +183,10 @@
     .groups {
       display: grid;
       gap: 18px;
+      margin-top: 18px;
     }
 
-    .group-card {
+    .group-card, .orphan-card {
       background: rgba(15, 23, 42, 0.45);
       border: 1px solid var(--border);
       border-radius: 20px;
@@ -305,28 +292,21 @@
     .btn, .small-btn, .icon-btn {
       border-radius: 12px;
       font-weight: 700;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
     }
 
-    .btn {
-      padding: 11px 16px;
-    }
-
-    .small-btn {
-      padding: 9px 12px;
-      font-size: 0.88rem;
-    }
-
-    .icon-btn {
-      padding: 9px 11px;
-      font-size: 0.88rem;
-      min-width: 42px;
-    }
+    .btn { padding: 11px 16px; }
+    .small-btn { padding: 9px 12px; font-size: 0.88rem; }
+    .icon-btn { padding: 9px 11px; font-size: 0.88rem; min-width: 42px; }
 
     .primary { background: linear-gradient(135deg, var(--accent), var(--accent2)); }
     .success { background: linear-gradient(135deg, var(--green), var(--green2)); }
     .danger { background: linear-gradient(135deg, var(--danger), var(--danger2)); }
-    .secondary { background: linear-gradient(135deg, #64748b, #475569); }
-    .warning { background: linear-gradient(135deg, #f59e0b, #d97706); }
+    .secondary { background: linear-gradient(135deg, var(--secondary1), var(--secondary2)); }
+    .warning { background: linear-gradient(135deg, var(--warning), var(--warning2)); }
 
     .empty-state {
       padding: 30px 20px;
@@ -375,7 +355,6 @@
       border: 1px solid var(--border);
       border-radius: 12px;
       padding: 10px 12px;
-      cursor: pointer;
     }
 
     .form-grid {
@@ -384,9 +363,7 @@
       gap: 14px;
     }
 
-    .full {
-      grid-column: 1 / -1;
-    }
+    .full { grid-column: 1 / -1; }
 
     .field {
       display: grid;
@@ -472,22 +449,19 @@
       border: 1px solid rgba(34, 197, 94, 0.25);
     }
 
-    @media (max-width: 860px) {
+    @media (max-width: 900px) {
+      .topbar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
       .form-grid {
         grid-template-columns: 1fr;
       }
-
       .link-card {
         grid-template-columns: 1fr;
       }
-
       .link-actions {
         justify-content: flex-start;
-      }
-
-      .topbar {
-        align-items: flex-start;
-        flex-direction: column;
       }
     }
   </style>
@@ -497,7 +471,7 @@
     <header class="topbar">
       <div class="brand">
         <h1>ICTサポーター</h1>
-        <p>Strona z grupami, podgrupami i linkami ładowanymi z pliku JSON.</p>
+        <p>Grupy, podgrupy i linki poza grupami z eksportem/importem JSON.</p>
       </div>
 
       <div class="menu-wrap">
@@ -505,7 +479,8 @@
         <div class="dropdown" id="dropdownMenu">
           <h3>Akcje</h3>
           <div class="menu-list">
-            <button class="menu-item" id="openEditorBtn">Dodaj lub edytuj link</button>
+            <button class="menu-item" id="openAddLinkBtn">Dodaj link</button>
+            <button class="menu-item" id="openAddGroupBtn">Dodaj grupę</button>
             <button class="menu-item" id="openJsonExportBtn">Eksport do JSON</button>
             <button class="menu-item" id="refreshJsonBtn">Odświeżanie z JSON</button>
             <button class="menu-item" id="openSettingsBtn">Ustawienia JSON</button>
@@ -517,49 +492,56 @@
     <section class="panel">
       <div class="panel-head">
         <div>
-          <h2>Lista grup i podstron</h2>
+          <h2>Zawartość strony</h2>
           <p id="summaryText">Ładowanie danych...</p>
         </div>
       </div>
 
       <div class="notice">
-        Nowy link automatycznie trafi do wybranej grupy i podgrupy. Kolejność linków możesz zmieniać ręcznie przyciskami ↑ i ↓.
-        Dane na stronie pochodzą z lokalnego stanu oraz mogą być odświeżane z pliku JSON podanego w ustawieniach.
+        Możesz tworzyć grupy, podgrupy oraz linki poza grupami. Linki poza grupami można ręcznie przesuwać i później łatwo przenosić do grupy.
       </div>
 
       <div id="groupsContainer" class="groups"></div>
     </section>
   </div>
 
-  <dialog id="editorDialog">
+  <dialog id="linkDialog">
     <div class="modal-content">
       <div class="modal-head">
-        <h2 id="editorTitle">Dodaj link</h2>
-        <button class="close-btn" type="button" data-close="editorDialog">Zamknij</button>
+        <h2 id="linkDialogTitle">Dodaj link</h2>
+        <button class="close-btn" type="button" data-close="linkDialog">Zamknij</button>
       </div>
 
       <form id="linkForm">
         <div class="form-grid">
+          <div class="field full">
+            <label for="placementType">Gdzie ma trafić link?</label>
+            <select id="placementType">
+              <option value="ungrouped">Poza grupami</option>
+              <option value="grouped">Do grupy</option>
+            </select>
+          </div>
+
           <div class="field">
             <label for="groupName">Grupa</label>
-            <input id="groupName" list="groupSuggestions" placeholder="Np. 吹田南小学校" required />
+            <input id="groupName" list="groupSuggestions" placeholder="Np. 吹田南小学校" />
             <datalist id="groupSuggestions"></datalist>
           </div>
 
           <div class="field">
             <label for="subgroupName">Podgrupa</label>
-            <input id="subgroupName" list="subgroupSuggestions" placeholder="Np. Nauczyciele / Dokumenty / Klasy" required />
+            <input id="subgroupName" list="subgroupSuggestions" placeholder="Np. Dokumenty" />
             <datalist id="subgroupSuggestions"></datalist>
           </div>
 
           <div class="field full">
             <label for="linkTitle">Tytuł linku</label>
-            <input id="linkTitle" type="text" placeholder="Np. Plan lekcji" required />
+            <input id="linkTitle" type="text" placeholder="Np. Strona główna" required />
           </div>
 
           <div class="field full">
             <label for="linkUrl">Adres URL</label>
-            <input id="linkUrl" type="url" placeholder="Np. https://example.com/plan" required />
+            <input id="linkUrl" type="url" placeholder="Np. https://example.com" required />
           </div>
 
           <div class="field full">
@@ -570,7 +552,33 @@
 
         <div class="modal-actions">
           <button type="submit" class="btn primary" id="saveLinkBtn">Zapisz</button>
-          <button type="button" class="btn secondary" id="cancelEditBtn">Anuluj</button>
+          <button type="button" class="btn secondary" id="cancelLinkBtn">Anuluj</button>
+        </div>
+      </form>
+    </div>
+  </dialog>
+
+  <dialog id="groupDialog">
+    <div class="modal-content">
+      <div class="modal-head">
+        <h2>Dodaj grupę</h2>
+        <button class="close-btn" type="button" data-close="groupDialog">Zamknij</button>
+      </div>
+
+      <form id="groupForm">
+        <div class="field">
+          <label for="newGroupName">Nazwa grupy</label>
+          <input id="newGroupName" type="text" placeholder="Np. 吹田南小学校" required />
+        </div>
+
+        <div class="field">
+          <label for="newSubgroupName">Pierwsza podgrupa (opcjonalnie)</label>
+          <input id="newSubgroupName" type="text" placeholder="Np. Ogólne" />
+        </div>
+
+        <div class="modal-actions">
+          <button type="submit" class="btn primary">Dodaj grupę</button>
+          <button type="button" class="btn secondary" id="cancelGroupBtn">Anuluj</button>
         </div>
       </form>
     </div>
@@ -589,10 +597,6 @@
         <button class="btn success" type="button" id="copyJsonBtn">Kopiuj JSON</button>
         <button class="btn secondary" type="button" id="downloadJsonBtn">Pobierz plik JSON</button>
       </div>
-
-      <div class="helper">
-        Skopiuj ten JSON i wklej go do pliku, np. <strong>data.json</strong>, a potem wrzuć na GitHub.
-      </div>
     </div>
   </dialog>
 
@@ -605,7 +609,7 @@
 
       <div class="field">
         <label for="jsonUrlInput">Adres pliku JSON</label>
-        <input id="jsonUrlInput" type="text" placeholder="Np. ./data.json albo pełny URL do pliku JSON" />
+        <input id="jsonUrlInput" type="text" placeholder="./data.json" />
       </div>
 
       <div class="modal-actions">
@@ -614,7 +618,7 @@
       </div>
 
       <div class="helper">
-        Jeśli wrzucisz plik JSON na GitHub Pages, podaj tutaj jego ścieżkę. Potem możesz użyć „Odświeżanie z JSON” z menu.
+        Ustaw tutaj ścieżkę do pliku JSON. Możesz potem użyć przycisku odświeżania z menu.
       </div>
 
       <div id="statusBox" class="status info"></div>
@@ -622,12 +626,20 @@
   </dialog>
 
   <script>
-    const APP_STORAGE_KEY = "ict-supporter-data-v2";
+    const APP_STORAGE_KEY = "ict-supporter-data-v3";
     const JSON_URL_STORAGE_KEY = "ict-supporter-json-url-v1";
 
     const state = {
       data: {
         title: "ICTサポーター",
+        ungroupedLinks: [
+          {
+            id: createId(),
+            title: "Link poza grupą",
+            url: "https://example.com",
+            description: "Taki link możesz później przenieść do grupy."
+          }
+        ],
         groups: [
           {
             id: createId(),
@@ -636,14 +648,7 @@
               {
                 id: createId(),
                 name: "Ogólne",
-                links: [
-                  {
-                    id: createId(),
-                    title: "Przykładowy link",
-                    url: "https://example.com",
-                    description: "Możesz edytować, usuwać i zmieniać kolejność tego linku."
-                  }
-                ]
+                links: []
               }
             ]
           },
@@ -661,16 +666,19 @@
         ]
       },
       editing: {
+        mode: null,
         groupId: null,
         subgroupId: null,
-        linkId: null
+        linkId: null,
+        source: null
       }
     };
 
-    const elements = {
+    const el = {
       menuToggle: document.getElementById("menuToggle"),
       dropdownMenu: document.getElementById("dropdownMenu"),
-      openEditorBtn: document.getElementById("openEditorBtn"),
+      openAddLinkBtn: document.getElementById("openAddLinkBtn"),
+      openAddGroupBtn: document.getElementById("openAddGroupBtn"),
       openJsonExportBtn: document.getElementById("openJsonExportBtn"),
       refreshJsonBtn: document.getElementById("refreshJsonBtn"),
       openSettingsBtn: document.getElementById("openSettingsBtn"),
@@ -678,18 +686,25 @@
       groupsContainer: document.getElementById("groupsContainer"),
       summaryText: document.getElementById("summaryText"),
 
-      editorDialog: document.getElementById("editorDialog"),
-      editorTitle: document.getElementById("editorTitle"),
+      linkDialog: document.getElementById("linkDialog"),
+      linkDialogTitle: document.getElementById("linkDialogTitle"),
       linkForm: document.getElementById("linkForm"),
+      placementType: document.getElementById("placementType"),
       groupName: document.getElementById("groupName"),
       subgroupName: document.getElementById("subgroupName"),
       linkTitle: document.getElementById("linkTitle"),
       linkUrl: document.getElementById("linkUrl"),
       linkDescription: document.getElementById("linkDescription"),
       saveLinkBtn: document.getElementById("saveLinkBtn"),
-      cancelEditBtn: document.getElementById("cancelEditBtn"),
+      cancelLinkBtn: document.getElementById("cancelLinkBtn"),
       groupSuggestions: document.getElementById("groupSuggestions"),
       subgroupSuggestions: document.getElementById("subgroupSuggestions"),
+
+      groupDialog: document.getElementById("groupDialog"),
+      groupForm: document.getElementById("groupForm"),
+      newGroupName: document.getElementById("newGroupName"),
+      newSubgroupName: document.getElementById("newSubgroupName"),
+      cancelGroupBtn: document.getElementById("cancelGroupBtn"),
 
       jsonDialog: document.getElementById("jsonDialog"),
       jsonOutput: document.getElementById("jsonOutput"),
@@ -704,7 +719,7 @@
     };
 
     function createId() {
-      return (crypto.randomUUID ? crypto.randomUUID() : "id-" + Date.now() + "-" + Math.random().toString(16).slice(2));
+      return crypto.randomUUID ? crypto.randomUUID() : "id-" + Date.now() + "-" + Math.random().toString(16).slice(2);
     }
 
     function saveState() {
@@ -731,24 +746,29 @@
     }
 
     function isValidData(data) {
-      return data && typeof data === "object" && Array.isArray(data.groups);
+      return data && typeof data === "object" && Array.isArray(data.groups) && Array.isArray(data.ungroupedLinks || []);
+    }
+
+    function normalizeLink(link) {
+      return {
+        id: link.id || createId(),
+        title: link.title || "Bez tytułu",
+        url: link.url || "#",
+        description: link.description || ""
+      };
     }
 
     function normalizeData(data) {
       return {
         title: data.title || "ICTサポーター",
+        ungroupedLinks: (data.ungroupedLinks || []).map(normalizeLink),
         groups: (data.groups || []).map(group => ({
           id: group.id || createId(),
           name: group.name || "Bez nazwy grupy",
           subgroups: (group.subgroups || []).map(subgroup => ({
             id: subgroup.id || createId(),
             name: subgroup.name || "Ogólne",
-            links: (subgroup.links || []).map(link => ({
-              id: link.id || createId(),
-              title: link.title || "Bez tytułu",
-              url: link.url || "#",
-              description: link.description || ""
-            }))
+            links: (subgroup.links || []).map(normalizeLink)
           }))
         }))
       };
@@ -760,50 +780,98 @@
       return div.innerHTML;
     }
 
-    function countAllLinks() {
+    function openDialog(dialog) {
+      if (typeof dialog.showModal === "function") dialog.showModal();
+    }
+
+    function closeDialog(dialog) {
+      if (dialog.open) dialog.close();
+    }
+
+    function countGroupedLinks() {
       return state.data.groups.reduce((acc, group) =>
         acc + group.subgroups.reduce((subAcc, subgroup) => subAcc + subgroup.links.length, 0), 0
       );
     }
 
+    function countSubgroups() {
+      return state.data.groups.reduce((acc, group) => acc + group.subgroups.length, 0);
+    }
+
     function updateSummary() {
-      const groupsCount = state.data.groups.length;
-      const subgroupsCount = state.data.groups.reduce((acc, group) => acc + group.subgroups.length, 0);
-      const linksCount = countAllLinks();
-      elements.summaryText.textContent = `${groupsCount} grup, ${subgroupsCount} podgrup, ${linksCount} linków`;
+      el.summaryText.textContent =
+        `${state.data.groups.length} grup, ${countSubgroups()} podgrup, ${countGroupedLinks()} linków w grupach, ${state.data.ungroupedLinks.length} linków poza grupami`;
     }
 
     function renderSuggestions() {
-      const groupNames = state.data.groups.map(group => group.name);
-      elements.groupSuggestions.innerHTML = groupNames
-        .map(name => `<option value="${escapeHtml(name)}"></option>`)
+      el.groupSuggestions.innerHTML = state.data.groups
+        .map(group => `<option value="${escapeHtml(group.name)}"></option>`)
         .join("");
 
       const subgroupNames = [...new Set(
         state.data.groups.flatMap(group => group.subgroups.map(subgroup => subgroup.name))
       )];
 
-      elements.subgroupSuggestions.innerHTML = subgroupNames
+      el.subgroupSuggestions.innerHTML = subgroupNames
         .map(name => `<option value="${escapeHtml(name)}"></option>`)
         .join("");
     }
 
-    function render() {
-      document.title = state.data.title || "ICTサポーター";
-      updateSummary();
-      renderSuggestions();
+    function renderUngroupedSection() {
+      return `
+        <section class="orphan-card">
+          <div class="group-header">
+            <div class="group-title-wrap">
+              <h3>Linki poza grupami</h3>
+              <div class="group-meta">${state.data.ungroupedLinks.length} linków</div>
+            </div>
+            <div class="link-actions">
+              <button class="small-btn secondary" onclick="openAddUngrouped()">Dodaj link poza grupą</button>
+            </div>
+          </div>
 
+          <div class="subgroups">
+            ${
+              state.data.ungroupedLinks.length
+                ? `<div class="links-list">
+                    ${state.data.ungroupedLinks.map((link, index) => `
+                      <article class="link-card">
+                        <div class="link-main">
+                          <h5>${escapeHtml(link.title)}</h5>
+                          <div class="link-url">${escapeHtml(link.url)}</div>
+                          <div class="link-desc">${escapeHtml(link.description || "Brak opisu.")}</div>
+                        </div>
+                        <div class="link-actions">
+                          <a class="small-btn success" href="${escapeHtml(link.url)}" target="_blank" rel="noopener noreferrer">Otwórz</a>
+                          <button class="icon-btn secondary" onclick="moveUngroupedLink('${link.id}',-1)" ${index === 0 ? "disabled" : ""}>↑</button>
+                          <button class="icon-btn secondary" onclick="moveUngroupedLink('${link.id}',1)" ${index === state.data.ungroupedLinks.length - 1 ? "disabled" : ""}>↓</button>
+                          <button class="small-btn warning" onclick="moveUngroupedToGroupPrompt('${link.id}')">Przenieś do grupy</button>
+                          <button class="small-btn warning" onclick="editUngroupedLink('${link.id}')">Edytuj</button>
+                          <button class="small-btn danger" onclick="deleteUngroupedLink('${link.id}')">Usuń</button>
+                        </div>
+                      </article>
+                    `).join("")}
+                  </div>`
+                : `<div class="empty-state">
+                    <p>Nie ma jeszcze linków poza grupami.</p>
+                  </div>`
+            }
+          </div>
+        </section>
+      `;
+    }
+
+    function renderGroupsSection() {
       if (!state.data.groups.length) {
-        elements.groupsContainer.innerHTML = `
+        return `
           <div class="empty-state">
             <p>Brak grup.</p>
-            <p>Dodaj pierwszy link z menu — grupa i podgrupa utworzą się automatycznie.</p>
+            <p>Dodaj grupę z menu albo dodaj link do nowej grupy.</p>
           </div>
         `;
-        return;
       }
 
-      elements.groupsContainer.innerHTML = state.data.groups.map(group => {
+      return state.data.groups.map(group => {
         const groupLinksCount = group.subgroups.reduce((acc, subgroup) => acc + subgroup.links.length, 0);
 
         return `
@@ -845,10 +913,10 @@
                               </div>
                               <div class="link-actions">
                                 <a class="small-btn success" href="${escapeHtml(link.url)}" target="_blank" rel="noopener noreferrer">Otwórz</a>
-                                <button class="icon-btn secondary" onclick="moveLink('${group.id}','${subgroup.id}','${link.id}',-1)" ${index === 0 ? "disabled" : ""}>↑</button>
-                                <button class="icon-btn secondary" onclick="moveLink('${group.id}','${subgroup.id}','${link.id}',1)" ${index === subgroup.links.length - 1 ? "disabled" : ""}>↓</button>
-                                <button class="small-btn warning" onclick="editLink('${group.id}','${subgroup.id}','${link.id}')">Edytuj</button>
-                                <button class="small-btn danger" onclick="deleteLink('${group.id}','${subgroup.id}','${link.id}')">Usuń</button>
+                                <button class="icon-btn secondary" onclick="moveGroupedLink('${group.id}','${subgroup.id}','${link.id}',-1)" ${index === 0 ? "disabled" : ""}>↑</button>
+                                <button class="icon-btn secondary" onclick="moveGroupedLink('${group.id}','${subgroup.id}','${link.id}',1)" ${index === subgroup.links.length - 1 ? "disabled" : ""}>↓</button>
+                                <button class="small-btn warning" onclick="editGroupedLink('${group.id}','${subgroup.id}','${link.id}')">Edytuj</button>
+                                <button class="small-btn danger" onclick="deleteGroupedLink('${group.id}','${subgroup.id}','${link.id}')">Usuń</button>
                               </div>
                             </article>
                           `).join("")}
@@ -865,60 +933,11 @@
       }).join("");
     }
 
-    function findGroupByName(name) {
-      return state.data.groups.find(group => group.name.trim().toLowerCase() === name.trim().toLowerCase());
-    }
-
-    function findOrCreateGroup(name) {
-      let group = findGroupByName(name);
-      if (!group) {
-        group = {
-          id: createId(),
-          name: name.trim(),
-          subgroups: []
-        };
-        state.data.groups.push(group);
-      }
-      return group;
-    }
-
-    function findSubgroupByName(group, subgroupName) {
-      return group.subgroups.find(subgroup => subgroup.name.trim().toLowerCase() === subgroupName.trim().toLowerCase());
-    }
-
-    function findOrCreateSubgroup(group, subgroupName) {
-      let subgroup = findSubgroupByName(group, subgroupName);
-      if (!subgroup) {
-        subgroup = {
-          id: createId(),
-          name: subgroupName.trim(),
-          links: []
-        };
-        group.subgroups.push(subgroup);
-      }
-      return subgroup;
-    }
-
-    function resetEditor() {
-      state.editing = { groupId: null, subgroupId: null, linkId: null };
-      elements.editorTitle.textContent = "Dodaj link";
-      elements.saveLinkBtn.textContent = "Zapisz";
-      elements.linkForm.reset();
-    }
-
-    function openDialog(dialog) {
-      if (typeof dialog.showModal === "function") {
-        dialog.showModal();
-      }
-    }
-
-    function closeDialog(dialog) {
-      if (dialog.open) dialog.close();
-    }
-
-    function fillEditorDefaults(groupName = "", subgroupName = "") {
-      elements.groupName.value = groupName;
-      elements.subgroupName.value = subgroupName;
+    function render() {
+      document.title = state.data.title || "ICTサポーター";
+      updateSummary();
+      renderSuggestions();
+      el.groupsContainer.innerHTML = renderUngroupedSection() + renderGroupsSection();
     }
 
     function exportJsonString() {
@@ -926,24 +945,17 @@
     }
 
     function setStatus(message, type = "info") {
-      elements.statusBox.className = `status show ${type}`;
-      elements.statusBox.textContent = message;
+      el.statusBox.className = `status show ${type}`;
+      el.statusBox.textContent = message;
     }
 
     async function loadFromJson(url = getJsonUrl()) {
       try {
         setStatus(`Wczytywanie danych z: ${url}`, "info");
         const response = await fetch(url, { cache: "no-store" });
-
-        if (!response.ok) {
-          throw new Error(`HTTP ${response.status}`);
-        }
-
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
         const json = await response.json();
-        if (!isValidData(json)) {
-          throw new Error("Nieprawidłowy format JSON");
-        }
-
+        if (!isValidData(json)) throw new Error("Nieprawidłowy format JSON");
         state.data = normalizeData(json);
         saveState();
         render();
@@ -966,121 +978,245 @@
       URL.revokeObjectURL(url);
     }
 
-    function removeEmptyStructures() {
+    function resetLinkForm() {
+      state.editing = { mode: null, groupId: null, subgroupId: null, linkId: null, source: null };
+      el.linkDialogTitle.textContent = "Dodaj link";
+      el.saveLinkBtn.textContent = "Zapisz";
+      el.linkForm.reset();
+      el.placementType.value = "ungrouped";
+      toggleGroupFields();
+    }
+
+    function toggleGroupFields() {
+      const grouped = el.placementType.value === "grouped";
+      el.groupName.required = grouped;
+      el.subgroupName.required = grouped;
+      el.groupName.disabled = !grouped;
+      el.subgroupName.disabled = !grouped;
+    }
+
+    function findGroupById(groupId) {
+      return state.data.groups.find(group => group.id === groupId);
+    }
+
+    function findSubgroupById(group, subgroupId) {
+      return group?.subgroups.find(subgroup => subgroup.id === subgroupId);
+    }
+
+    function findGroupByName(name) {
+      return state.data.groups.find(group => group.name.trim().toLowerCase() === name.trim().toLowerCase());
+    }
+
+    function findOrCreateGroup(name) {
+      let group = findGroupByName(name);
+      if (!group) {
+        group = {
+          id: createId(),
+          name: name.trim(),
+          subgroups: []
+        };
+        state.data.groups.push(group);
+      }
+      return group;
+    }
+
+    function findSubgroupByName(group, name) {
+      return group.subgroups.find(subgroup => subgroup.name.trim().toLowerCase() === name.trim().toLowerCase());
+    }
+
+    function findOrCreateSubgroup(group, name) {
+      let subgroup = findSubgroupByName(group, name);
+      if (!subgroup) {
+        subgroup = {
+          id: createId(),
+          name: name.trim(),
+          links: []
+        };
+        group.subgroups.push(subgroup);
+      }
+      return subgroup;
+    }
+
+    function cleanupEmptySubgroupsAndGroups() {
       state.data.groups = state.data.groups
         .map(group => ({
           ...group,
-          subgroups: group.subgroups.filter(subgroup => subgroup.links.length > 0 || subgroup.name)
+          subgroups: group.subgroups.filter(subgroup => subgroup.name || subgroup.links.length > 0)
         }))
-        .filter(group => group.subgroups.length > 0 || group.name);
+        .filter(group => group.name || group.subgroups.length > 0);
     }
 
-    elements.menuToggle.addEventListener("click", () => {
-      elements.dropdownMenu.classList.toggle("open");
+    function moveItem(array, fromIndex, toIndex) {
+      if (fromIndex < 0 || toIndex < 0 || fromIndex >= array.length || toIndex >= array.length) return;
+      const [item] = array.splice(fromIndex, 1);
+      array.splice(toIndex, 0, item);
+    }
+
+    el.menuToggle.addEventListener("click", () => {
+      el.dropdownMenu.classList.toggle("open");
     });
 
     document.addEventListener("click", (event) => {
-      const clickedInside = event.target.closest(".menu-wrap");
-      if (!clickedInside) elements.dropdownMenu.classList.remove("open");
+      if (!event.target.closest(".menu-wrap")) {
+        el.dropdownMenu.classList.remove("open");
+      }
     });
 
-    elements.openEditorBtn.addEventListener("click", () => {
-      resetEditor();
-      openDialog(elements.editorDialog);
-      elements.dropdownMenu.classList.remove("open");
+    el.openAddLinkBtn.addEventListener("click", () => {
+      resetLinkForm();
+      openDialog(el.linkDialog);
+      el.dropdownMenu.classList.remove("open");
     });
 
-    elements.openJsonExportBtn.addEventListener("click", () => {
-      elements.jsonOutput.value = exportJsonString();
-      openDialog(elements.jsonDialog);
-      elements.dropdownMenu.classList.remove("open");
+    el.openAddGroupBtn.addEventListener("click", () => {
+      el.groupForm.reset();
+      openDialog(el.groupDialog);
+      el.dropdownMenu.classList.remove("open");
     });
 
-    elements.refreshJsonBtn.addEventListener("click", async () => {
-      elements.dropdownMenu.classList.remove("open");
+    el.openJsonExportBtn.addEventListener("click", () => {
+      el.jsonOutput.value = exportJsonString();
+      openDialog(el.jsonDialog);
+      el.dropdownMenu.classList.remove("open");
+    });
+
+    el.refreshJsonBtn.addEventListener("click", async () => {
+      el.dropdownMenu.classList.remove("open");
       await loadFromJson();
     });
 
-    elements.openSettingsBtn.addEventListener("click", () => {
-      elements.jsonUrlInput.value = getJsonUrl();
+    el.openSettingsBtn.addEventListener("click", () => {
+      el.jsonUrlInput.value = getJsonUrl();
       setStatus("Tutaj ustawisz adres pliku JSON.", "info");
-      openDialog(elements.settingsDialog);
-      elements.dropdownMenu.classList.remove("open");
+      openDialog(el.settingsDialog);
+      el.dropdownMenu.classList.remove("open");
     });
 
     document.querySelectorAll("[data-close]").forEach(btn => {
       btn.addEventListener("click", () => {
-        const dialogId = btn.getAttribute("data-close");
-        closeDialog(document.getElementById(dialogId));
+        closeDialog(document.getElementById(btn.dataset.close));
       });
     });
 
-    elements.cancelEditBtn.addEventListener("click", () => {
-      resetEditor();
-      closeDialog(elements.editorDialog);
+    el.cancelLinkBtn.addEventListener("click", () => {
+      resetLinkForm();
+      closeDialog(el.linkDialog);
     });
 
-    elements.linkForm.addEventListener("submit", (event) => {
+    el.cancelGroupBtn.addEventListener("click", () => {
+      el.groupForm.reset();
+      closeDialog(el.groupDialog);
+    });
+
+    el.placementType.addEventListener("change", toggleGroupFields);
+
+    el.linkForm.addEventListener("submit", (event) => {
       event.preventDefault();
 
-      const groupName = elements.groupName.value.trim();
-      const subgroupName = elements.subgroupName.value.trim();
-      const title = elements.linkTitle.value.trim();
-      const url = elements.linkUrl.value.trim();
-      const description = elements.linkDescription.value.trim();
+      const placement = el.placementType.value;
+      const title = el.linkTitle.value.trim();
+      const url = el.linkUrl.value.trim();
+      const description = el.linkDescription.value.trim();
+      const groupName = el.groupName.value.trim();
+      const subgroupName = el.subgroupName.value.trim();
 
-      if (!groupName || !subgroupName || !title || !url) return;
+      if (!title || !url) return;
 
-      if (state.editing.linkId) {
-        const oldGroup = state.data.groups.find(g => g.id === state.editing.groupId);
-        const oldSubgroup = oldGroup?.subgroups.find(sg => sg.id === state.editing.subgroupId);
-        const linkIndex = oldSubgroup?.links.findIndex(link => link.id === state.editing.linkId);
+      if (state.editing.mode === "edit-ungrouped") {
+        const index = state.data.ungroupedLinks.findIndex(link => link.id === state.editing.linkId);
+        if (index > -1) {
+          const existing = state.data.ungroupedLinks[index];
 
-        if (oldSubgroup && linkIndex > -1) {
-          const [existingLink] = oldSubgroup.links.splice(linkIndex, 1);
+          if (placement === "ungrouped") {
+            state.data.ungroupedLinks[index] = { ...existing, title, url, description };
+          } else {
+            const targetGroup = findOrCreateGroup(groupName);
+            const targetSubgroup = findOrCreateSubgroup(targetGroup, subgroupName);
+            state.data.ungroupedLinks.splice(index, 1);
+            targetSubgroup.links.push({ ...existing, title, url, description });
+          }
+        }
+      } else if (state.editing.mode === "edit-grouped") {
+        const sourceGroup = findGroupById(state.editing.groupId);
+        const sourceSubgroup = findSubgroupById(sourceGroup, state.editing.subgroupId);
+        const sourceIndex = sourceSubgroup?.links.findIndex(link => link.id === state.editing.linkId);
 
+        if (sourceSubgroup && sourceIndex > -1) {
+          const [existing] = sourceSubgroup.links.splice(sourceIndex, 1);
+
+          if (placement === "ungrouped") {
+            state.data.ungroupedLinks.push({ ...existing, title, url, description });
+          } else {
+            const targetGroup = findOrCreateGroup(groupName);
+            const targetSubgroup = findOrCreateSubgroup(targetGroup, subgroupName);
+            targetSubgroup.links.push({ ...existing, title, url, description });
+          }
+        }
+      } else {
+        if (placement === "ungrouped") {
+          state.data.ungroupedLinks.push({
+            id: createId(),
+            title,
+            url,
+            description
+          });
+        } else {
           const targetGroup = findOrCreateGroup(groupName);
           const targetSubgroup = findOrCreateSubgroup(targetGroup, subgroupName);
-
           targetSubgroup.links.push({
-            ...existingLink,
+            id: createId(),
             title,
             url,
             description
           });
         }
-      } else {
-        const group = findOrCreateGroup(groupName);
-        const subgroup = findOrCreateSubgroup(group, subgroupName);
-
-        subgroup.links.push({
-          id: createId(),
-          title,
-          url,
-          description
-        });
       }
 
-      removeEmptyStructures();
+      cleanupEmptySubgroupsAndGroups();
       saveState();
       render();
-      resetEditor();
-      closeDialog(elements.editorDialog);
+      resetLinkForm();
+      closeDialog(el.linkDialog);
     });
 
-    elements.copyJsonBtn.addEventListener("click", async () => {
+    el.groupForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const name = el.newGroupName.value.trim();
+      const firstSubgroup = el.newSubgroupName.value.trim();
+
+      if (!name) return;
+      if (findGroupByName(name)) {
+        alert("Taka grupa już istnieje.");
+        return;
+      }
+
+      state.data.groups.push({
+        id: createId(),
+        name,
+        subgroups: firstSubgroup
+          ? [{ id: createId(), name: firstSubgroup, links: [] }]
+          : []
+      });
+
+      saveState();
+      render();
+      el.groupForm.reset();
+      closeDialog(el.groupDialog);
+    });
+
+    el.copyJsonBtn.addEventListener("click", async () => {
       try {
-        await navigator.clipboard.writeText(elements.jsonOutput.value);
+        await navigator.clipboard.writeText(el.jsonOutput.value);
         alert("JSON skopiowany do schowka.");
       } catch {
         alert("Nie udało się skopiować JSON.");
       }
     });
 
-    elements.downloadJsonBtn.addEventListener("click", buildDownload);
+    el.downloadJsonBtn.addEventListener("click", buildDownload);
 
-    elements.saveJsonUrlBtn.addEventListener("click", () => {
-      const url = elements.jsonUrlInput.value.trim();
+    el.saveJsonUrlBtn.addEventListener("click", () => {
+      const url = el.jsonUrlInput.value.trim();
       if (!url) {
         setStatus("Podaj adres pliku JSON.", "error");
         return;
@@ -1089,8 +1225,8 @@
       setStatus("Adres pliku JSON został zapisany.", "success");
     });
 
-    elements.loadJsonNowBtn.addEventListener("click", async () => {
-      const url = elements.jsonUrlInput.value.trim();
+    el.loadJsonNowBtn.addEventListener("click", async () => {
+      const url = el.jsonUrlInput.value.trim();
       if (!url) {
         setStatus("Podaj adres pliku JSON.", "error");
         return;
@@ -1099,52 +1235,125 @@
       await loadFromJson(url);
     });
 
+    window.openAddUngrouped = function() {
+      resetLinkForm();
+      el.placementType.value = "ungrouped";
+      toggleGroupFields();
+      openDialog(el.linkDialog);
+    };
+
     window.openAddForGroup = function(groupId) {
-      resetEditor();
-      const group = state.data.groups.find(g => g.id === groupId);
+      resetLinkForm();
+      const group = findGroupById(groupId);
       if (!group) return;
-      fillEditorDefaults(group.name, "");
-      openDialog(elements.editorDialog);
+      el.placementType.value = "grouped";
+      toggleGroupFields();
+      el.groupName.value = group.name;
+      openDialog(el.linkDialog);
     };
 
     window.openAddForSubgroup = function(groupId, subgroupId) {
-      resetEditor();
-      const group = state.data.groups.find(g => g.id === groupId);
-      const subgroup = group?.subgroups.find(sg => sg.id === subgroupId);
+      resetLinkForm();
+      const group = findGroupById(groupId);
+      const subgroup = findSubgroupById(group, subgroupId);
       if (!group || !subgroup) return;
-      fillEditorDefaults(group.name, subgroup.name);
-      openDialog(elements.editorDialog);
+      el.placementType.value = "grouped";
+      toggleGroupFields();
+      el.groupName.value = group.name;
+      el.subgroupName.value = subgroup.name;
+      openDialog(el.linkDialog);
     };
 
-    window.editLink = function(groupId, subgroupId, linkId) {
-      const group = state.data.groups.find(g => g.id === groupId);
-      const subgroup = group?.subgroups.find(sg => sg.id === subgroupId);
-      const link = subgroup?.links.find(l => l.id === linkId);
+    window.editUngroupedLink = function(linkId) {
+      const link = state.data.ungroupedLinks.find(item => item.id === linkId);
+      if (!link) return;
+
+      resetLinkForm();
+      state.editing = { mode: "edit-ungrouped", groupId: null, subgroupId: null, linkId, source: "ungrouped" };
+      el.linkDialogTitle.textContent = "Edytuj link poza grupą";
+      el.saveLinkBtn.textContent = "Zapisz zmiany";
+      el.placementType.value = "ungrouped";
+      toggleGroupFields();
+      el.linkTitle.value = link.title;
+      el.linkUrl.value = link.url;
+      el.linkDescription.value = link.description || "";
+      openDialog(el.linkDialog);
+    };
+
+    window.editGroupedLink = function(groupId, subgroupId, linkId) {
+      const group = findGroupById(groupId);
+      const subgroup = findSubgroupById(group, subgroupId);
+      const link = subgroup?.links.find(item => item.id === linkId);
       if (!group || !subgroup || !link) return;
 
-      state.editing = { groupId, subgroupId, linkId };
-      elements.editorTitle.textContent = "Edytuj link";
-      elements.saveLinkBtn.textContent = "Zapisz zmiany";
-      elements.groupName.value = group.name;
-      elements.subgroupName.value = subgroup.name;
-      elements.linkTitle.value = link.title;
-      elements.linkUrl.value = link.url;
-      elements.linkDescription.value = link.description || "";
-      openDialog(elements.editorDialog);
+      resetLinkForm();
+      state.editing = { mode: "edit-grouped", groupId, subgroupId, linkId, source: "grouped" };
+      el.linkDialogTitle.textContent = "Edytuj link w grupie";
+      el.saveLinkBtn.textContent = "Zapisz zmiany";
+      el.placementType.value = "grouped";
+      toggleGroupFields();
+      el.groupName.value = group.name;
+      el.subgroupName.value = subgroup.name;
+      el.linkTitle.value = link.title;
+      el.linkUrl.value = link.url;
+      el.linkDescription.value = link.description || "";
+      openDialog(el.linkDialog);
     };
 
-    window.deleteLink = function(groupId, subgroupId, linkId) {
+    window.deleteUngroupedLink = function(linkId) {
       if (!confirm("Czy na pewno chcesz usunąć ten link?")) return;
-
-      const group = state.data.groups.find(g => g.id === groupId);
-      const subgroup = group?.subgroups.find(sg => sg.id === subgroupId);
-      if (!group || !subgroup) return;
-
-      subgroup.links = subgroup.links.filter(link => link.id !== linkId);
-      group.subgroups = group.subgroups.filter(sg => sg.links.length > 0 || sg.name);
-      state.data.groups = state.data.groups.filter(g => g.subgroups.length > 0 || g.name);
+      state.data.ungroupedLinks = state.data.ungroupedLinks.filter(link => link.id !== linkId);
       saveState();
       render();
+    };
+
+    window.deleteGroupedLink = function(groupId, subgroupId, linkId) {
+      if (!confirm("Czy na pewno chcesz usunąć ten link?")) return;
+      const group = findGroupById(groupId);
+      const subgroup = findSubgroupById(group, subgroupId);
+      if (!group || !subgroup) return;
+      subgroup.links = subgroup.links.filter(link => link.id !== linkId);
+      saveState();
+      render();
+    };
+
+    window.moveUngroupedLink = function(linkId, direction) {
+      const index = state.data.ungroupedLinks.findIndex(link => link.id === linkId);
+      if (index === -1) return;
+      const newIndex = index + direction;
+      if (newIndex < 0 || newIndex >= state.data.ungroupedLinks.length) return;
+      moveItem(state.data.ungroupedLinks, index, newIndex);
+      saveState();
+      render();
+    };
+
+    window.moveGroupedLink = function(groupId, subgroupId, linkId, direction) {
+      const group = findGroupById(groupId);
+      const subgroup = findSubgroupById(group, subgroupId);
+      if (!group || !subgroup) return;
+      const index = subgroup.links.findIndex(link => link.id === linkId);
+      if (index === -1) return;
+      const newIndex = index + direction;
+      if (newIndex < 0 || newIndex >= subgroup.links.length) return;
+      moveItem(subgroup.links, index, newIndex);
+      saveState();
+      render();
+    };
+
+    window.moveUngroupedToGroupPrompt = function(linkId) {
+      const link = state.data.ungroupedLinks.find(item => item.id === linkId);
+      if (!link) return;
+
+      resetLinkForm();
+      state.editing = { mode: "edit-ungrouped", groupId: null, subgroupId: null, linkId, source: "ungrouped" };
+      el.linkDialogTitle.textContent = "Przenieś link do grupy";
+      el.saveLinkBtn.textContent = "Przenieś";
+      el.placementType.value = "grouped";
+      toggleGroupFields();
+      el.linkTitle.value = link.title;
+      el.linkUrl.value = link.url;
+      el.linkDescription.value = link.description || "";
+      openDialog(el.linkDialog);
     };
 
     window.deleteGroup = function(groupId) {
@@ -1156,31 +1365,15 @@
 
     window.deleteSubgroup = function(groupId, subgroupId) {
       if (!confirm("Czy na pewno chcesz usunąć tę podgrupę?")) return;
-      const group = state.data.groups.find(g => g.id === groupId);
+      const group = findGroupById(groupId);
       if (!group) return;
       group.subgroups = group.subgroups.filter(subgroup => subgroup.id !== subgroupId);
-      state.data.groups = state.data.groups.filter(g => g.subgroups.length > 0 || g.name);
-      saveState();
-      render();
-    };
-
-    window.moveLink = function(groupId, subgroupId, linkId, direction) {
-      const group = state.data.groups.find(g => g.id === groupId);
-      const subgroup = group?.subgroups.find(sg => sg.id === subgroupId);
-      if (!group || !subgroup) return;
-
-      const index = subgroup.links.findIndex(link => link.id === linkId);
-      if (index === -1) return;
-
-      const newIndex = index + direction;
-      if (newIndex < 0 || newIndex >= subgroup.links.length) return;
-
-      [subgroup.links[index], subgroup.links[newIndex]] = [subgroup.links[newIndex], subgroup.links[index]];
       saveState();
       render();
     };
 
     loadState();
+    toggleGroupFields();
     render();
   </script>
 </body>

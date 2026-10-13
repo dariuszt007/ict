@@ -2,13 +2,15 @@
 <html lang="pl">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0f172a" />
+  <meta name="description" content="ICTサポーター - zarządzanie linkami szkół, grup i podgrup z obsługą JSON." />
   <title>ICTサポーター</title>
   <style>
     :root{
-      --bg:#0b1220;
-      --bg2:#111827;
-      --panel:rgba(15,23,42,.9);
+      --bg:#020617;
+      --bg2:#0f172a;
+      --panel:rgba(15,23,42,.92);
       --panel-2:rgba(30,41,59,.92);
       --card:rgba(30,41,59,.88);
       --text:#f8fafc;
@@ -26,73 +28,106 @@
       --secondary2:#475569;
       --shadow:0 18px 50px rgba(0,0,0,.35);
       --radius:20px;
+      --focus:0 0 0 3px rgba(56,189,248,.22);
     }
 
     *{box-sizing:border-box}
     html,body{margin:0;padding:0;min-height:100%}
+    html{scroll-behavior:smooth}
     body{
       font-family:Inter,Arial,sans-serif;
       color:var(--text);
       background:
-        radial-gradient(circle at top left, rgba(56,189,248,.14), transparent 28%),
+        radial-gradient(circle at top left, rgba(56,189,248,.13), transparent 28%),
         radial-gradient(circle at top right, rgba(34,197,94,.08), transparent 24%),
-        linear-gradient(135deg, #020617, var(--bg) 42%, var(--bg2));
+        linear-gradient(135deg, var(--bg), var(--bg2) 45%, #111827);
     }
 
     a{color:inherit}
     button,input,textarea,select{font:inherit}
+    button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible,a:focus-visible{
+      outline:none;
+      box-shadow:var(--focus);
+    }
 
     .container{
-      width:min(1280px, calc(100% - 24px));
+      width:min(1320px, calc(100% - 24px));
       margin:0 auto;
-      padding:14px 0 44px;
+      padding:12px 0 36px;
     }
 
     .topbar{
       position:sticky;
       top:8px;
-      z-index:50;
+      z-index:60;
       display:flex;
       align-items:center;
       justify-content:space-between;
-      gap:16px;
-      padding:16px 18px;
+      gap:14px;
+      padding:14px 16px;
       border:1px solid var(--line);
       border-radius:24px;
-      background:rgba(15,23,42,.86);
+      background:rgba(15,23,42,.88);
       backdrop-filter:blur(14px);
       box-shadow:var(--shadow);
     }
 
-    .brand{
-      min-width:0;
-    }
-
+    .brand{min-width:0}
     .brand h1{
       margin:0;
-      font-size:clamp(1.4rem, 4vw, 2.4rem);
+      font-size:clamp(1.3rem, 3.8vw, 2.2rem);
       line-height:1.1;
-      word-break:break-word;
     }
-
     .brand p{
       margin:6px 0 0;
       color:var(--muted);
-      font-size:.94rem;
+      font-size:.92rem;
+      line-height:1.5;
     }
 
-    .menu-wrap{
-      position:relative;
+    .top-actions{
+      display:flex;
+      align-items:center;
+      gap:10px;
       flex-shrink:0;
     }
 
-    .menu-btn,.btn,.small-btn,.icon-btn,.close-btn{
+    .search-wrap{
+      position:relative;
+      width:min(360px, 42vw);
+    }
+
+    .search-input{
+      width:100%;
+      border:1px solid var(--line);
+      background:rgba(15,23,42,.92);
+      color:var(--text);
+      border-radius:14px;
+      padding:12px 42px 12px 14px;
+    }
+
+    .search-clear{
+      position:absolute;
+      right:8px;
+      top:50%;
+      transform:translateY(-50%);
+      border:none;
+      background:transparent;
+      color:var(--muted);
+      cursor:pointer;
+      padding:8px;
+      border-radius:10px;
+    }
+
+    .menu-wrap{position:relative}
+
+    .menu-btn,.btn,.small-btn,.icon-btn,.close-btn,.chip-btn{
       border:none;
       color:#fff;
       cursor:pointer;
-      transition:transform .15s ease, opacity .15s ease, filter .15s ease;
+      transition:transform .15s ease, filter .15s ease, opacity .15s ease;
     }
-    .menu-btn:hover,.btn:hover,.small-btn:hover,.icon-btn:hover,.close-btn:hover{
+    .menu-btn:hover,.btn:hover,.small-btn:hover,.icon-btn:hover,.close-btn:hover,.chip-btn:hover{
       transform:translateY(-1px);
       filter:brightness(1.03);
     }
@@ -109,15 +144,14 @@
       position:absolute;
       right:0;
       top:calc(100% + 10px);
-      width:min(360px, calc(100vw - 24px));
-      background:rgba(15,23,42,.98);
+      width:min(380px, calc(100vw - 24px));
+      background:rgba(15,23,42,.99);
       border:1px solid var(--line);
       border-radius:18px;
       padding:12px;
       box-shadow:var(--shadow);
       display:none;
     }
-
     .desktop-dropdown.open{display:block}
 
     .desktop-dropdown h3,.mobile-menu-sheet h3{
@@ -138,35 +172,32 @@
       border:none;
       border-radius:12px;
       padding:13px 14px;
-      background:rgba(30,41,59,.95);
+      background:rgba(30,41,59,.96);
       color:var(--text);
       border:1px solid transparent;
       cursor:pointer;
     }
-
-    .menu-item:hover{
-      border-color:var(--accent);
-    }
+    .menu-item:hover{border-color:var(--accent)}
 
     .hero{
-      margin-top:18px;
-      padding:22px;
+      margin-top:16px;
+      padding:20px;
       border-radius:26px;
       border:1px solid var(--line);
-      background:linear-gradient(180deg, rgba(56,189,248,.12), rgba(15,23,42,.82));
+      background:linear-gradient(180deg, rgba(56,189,248,.10), rgba(15,23,42,.86));
       box-shadow:var(--shadow);
     }
 
     .hero-grid{
       display:grid;
-      grid-template-columns:1.2fr .8fr;
+      grid-template-columns:1.1fr .9fr;
       gap:18px;
       align-items:start;
     }
 
     .hero h2{
       margin:0 0 8px;
-      font-size:clamp(1.15rem, 2.6vw, 1.7rem);
+      font-size:clamp(1.08rem, 2.5vw, 1.6rem);
     }
 
     .hero p{
@@ -185,26 +216,26 @@
       background:rgba(15,23,42,.66);
       border:1px solid var(--line);
       border-radius:18px;
-      padding:16px;
+      padding:14px;
     }
 
     .stat .label{
       color:var(--muted);
-      font-size:.9rem;
+      font-size:.88rem;
       margin-bottom:8px;
     }
 
     .stat .value{
-      font-size:1.4rem;
+      font-size:1.35rem;
       font-weight:800;
     }
 
     .panel{
-      margin-top:18px;
+      margin-top:16px;
       background:var(--panel);
       border:1px solid var(--line);
       border-radius:24px;
-      padding:20px;
+      padding:18px;
       box-shadow:var(--shadow);
     }
 
@@ -214,17 +245,38 @@
       align-items:flex-start;
       gap:12px;
       flex-wrap:wrap;
-      margin-bottom:14px;
+      margin-bottom:12px;
     }
 
     .panel-head h2{
       margin:0;
-      font-size:1.2rem;
+      font-size:1.15rem;
     }
 
     .panel-head p{
       margin:6px 0 0;
       color:var(--muted);
+    }
+
+    .toolbar{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+
+    .chip-btn{
+      background:rgba(30,41,59,.95);
+      color:var(--text);
+      border:1px solid var(--line);
+      border-radius:999px;
+      padding:9px 12px;
+      font-size:.88rem;
+    }
+
+    .chip-btn.active{
+      border-color:var(--accent);
+      box-shadow:0 0 0 2px rgba(56,189,248,.12) inset;
     }
 
     .notice{
@@ -240,8 +292,8 @@
 
     .groups{
       display:grid;
-      gap:18px;
-      margin-top:18px;
+      gap:16px;
+      margin-top:16px;
     }
 
     .section-card,.group-card{
@@ -252,7 +304,7 @@
     }
 
     .group-header{
-      padding:18px;
+      padding:16px;
       display:flex;
       justify-content:space-between;
       gap:12px;
@@ -264,26 +316,26 @@
 
     .group-title-wrap h3{
       margin:0;
-      font-size:1.18rem;
+      font-size:1.12rem;
     }
 
     .group-meta{
       margin-top:6px;
       color:var(--muted);
-      font-size:.92rem;
+      font-size:.9rem;
     }
 
     .subgroups{
       display:grid;
       gap:14px;
-      padding:16px;
+      padding:14px;
     }
 
     .subgroup-card{
       background:var(--panel-2);
       border:1px solid var(--line);
       border-radius:18px;
-      padding:15px;
+      padding:14px;
     }
 
     .subgroup-head{
@@ -297,7 +349,7 @@
 
     .subgroup-head h4{
       margin:0;
-      font-size:1.02rem;
+      font-size:1rem;
     }
 
     .subgroup-meta{
@@ -339,6 +391,25 @@
       line-height:1.55;
     }
 
+    .link-tags{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin-top:10px;
+    }
+
+    .tag{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:6px 10px;
+      border-radius:999px;
+      background:rgba(15,23,42,.62);
+      border:1px solid var(--line);
+      color:var(--muted);
+      font-size:.78rem;
+    }
+
     .link-actions{
       display:flex;
       gap:8px;
@@ -366,6 +437,14 @@
     .danger{background:linear-gradient(135deg,var(--danger),var(--danger2))}
     .secondary{background:linear-gradient(135deg,var(--secondary),var(--secondary2))}
 
+    .muted-box{
+      padding:12px 14px;
+      border:1px dashed var(--line);
+      border-radius:16px;
+      color:var(--muted);
+      background:rgba(15,23,42,.28);
+    }
+
     .empty-state{
       padding:26px 18px;
       text-align:center;
@@ -376,10 +455,10 @@
     }
 
     dialog{
-      width:min(780px, calc(100% - 16px));
+      width:min(820px, calc(100% - 16px));
       border:1px solid var(--line);
       border-radius:24px;
-      background:rgba(15,23,42,.99);
+      background:rgba(15,23,42,.995);
       color:var(--text);
       box-shadow:var(--shadow);
       padding:0;
@@ -390,7 +469,7 @@
       backdrop-filter:blur(3px);
     }
 
-    .modal-content{padding:20px}
+    .modal-content{padding:18px}
     .modal-head{
       display:flex;
       justify-content:space-between;
@@ -398,9 +477,10 @@
       gap:12px;
       margin-bottom:18px;
     }
+
     .modal-head h2{
       margin:0;
-      font-size:1.18rem;
+      font-size:1.12rem;
     }
 
     .close-btn{
@@ -440,13 +520,14 @@
     }
 
     .field textarea{
-      min-height:100px;
+      min-height:104px;
       resize:vertical;
     }
 
-    .field input:focus,.field textarea:focus,.field select:focus{
-      border-color:var(--accent);
-      box-shadow:0 0 0 3px rgba(56,189,248,.18);
+    .field-hint{
+      color:var(--muted);
+      font-size:.82rem;
+      line-height:1.5;
     }
 
     .modal-actions{
@@ -458,7 +539,7 @@
 
     .json-box{
       width:100%;
-      min-height:320px;
+      min-height:340px;
       padding:14px;
       background:rgba(15,23,42,.95);
       color:#e2e8f0;
@@ -504,7 +585,7 @@
     .mobile-menu-backdrop{
       position:fixed;
       inset:0;
-      background:rgba(2,6,23,.55);
+      background:rgba(2,6,23,.58);
       backdrop-filter:blur(2px);
       z-index:79;
       display:none;
@@ -519,10 +600,10 @@
       display:none;
       border:1px solid var(--line);
       border-radius:22px;
-      background:rgba(15,23,42,.98);
+      background:rgba(15,23,42,.99);
       box-shadow:var(--shadow);
       padding:14px;
-      max-height:min(72vh, 640px);
+      max-height:min(74vh, 680px);
       overflow:auto;
     }
 
@@ -539,15 +620,39 @@
       margin-bottom:8px;
     }
 
-    .mobile-menu-top strong{
-      font-size:1rem;
+    .footer{
+      margin-top:16px;
+      padding:14px 16px;
+      border:1px solid var(--line);
+      border-radius:18px;
+      background:rgba(15,23,42,.6);
+      color:var(--muted);
+      font-size:.9rem;
+      line-height:1.6;
     }
 
-    @media (max-width: 920px){
+    [hidden]{display:none !important}
+
+    @media (max-width: 980px){
       .hero-grid{grid-template-columns:1fr}
       .link-card{grid-template-columns:1fr}
       .link-actions{justify-content:flex-start}
       .form-grid{grid-template-columns:1fr}
+      .search-wrap{width:min(280px, 40vw)}
+    }
+
+    @media (max-width: 720px){
+      .topbar{
+        flex-direction:column;
+        align-items:stretch;
+      }
+      .top-actions{
+        width:100%;
+        justify-content:space-between;
+      }
+      .search-wrap{
+        width:100%;
+      }
     }
 
     @media (max-width: 640px){
@@ -560,14 +665,6 @@
         top:6px;
         padding:14px;
         border-radius:20px;
-      }
-
-      .brand p{
-        font-size:.88rem;
-      }
-
-      .menu-btn{
-        padding:12px 14px;
       }
 
       .desktop-dropdown{
@@ -588,8 +685,8 @@
       }
 
       dialog{
-        width:calc(100% - 12px);
-        max-height:92vh;
+        width:calc(100% - 10px);
+        max-height:94vh;
       }
 
       .modal-content{
@@ -603,15 +700,21 @@
     <header class="topbar">
       <div class="brand">
         <h1>ICTサポーター</h1>
-        <p>Profesjonalny panel linków z grupami, podgrupami, sekcją poza grupami oraz obsługą pliku JSON.</p>
+        <p>Production-ready panel do zarządzania linkami szkół, grup, podgrup i danych JSON na GitHub Pages.</p>
       </div>
 
-      <div class="menu-wrap">
-        <button class="menu-btn" id="menuToggle" aria-expanded="false" aria-controls="desktopDropdown mobileMenuSheet">☰ Menu</button>
+      <div class="top-actions">
+        <div class="search-wrap">
+          <input id="searchInput" class="search-input" type="search" placeholder="Szukaj linków, grup, podgrup..." aria-label="Szukaj" />
+          <button id="searchClearBtn" class="search-clear" type="button" aria-label="Wyczyść wyszukiwanie">✕</button>
+        </div>
 
-        <div class="desktop-dropdown" id="desktopDropdown">
-          <h3>Akcje</h3>
-          <div class="menu-list" id="desktopMenuList"></div>
+        <div class="menu-wrap">
+          <button class="menu-btn" id="menuToggle" aria-expanded="false" aria-controls="desktopDropdown mobileMenuSheet">☰ Menu</button>
+          <div class="desktop-dropdown" id="desktopDropdown">
+            <h3>Akcje</h3>
+            <div class="menu-list" id="desktopMenuList"></div>
+          </div>
         </div>
       </div>
     </header>
@@ -619,11 +722,11 @@
     <section class="hero">
       <div class="hero-grid">
         <div>
-          <h2>Zarządzanie linkami i szkołami w jednym miejscu</h2>
+          <h2>Centralne miejsce do zarządzania linkami</h2>
           <p>
-            Dodawaj nowe grupy, podgrupy, linki poza grupami, eksportuj dane do JSON,
-            odświeżaj z pliku JSON i zmieniaj kolejność elementów. Ta wersja została
-            poprawiona także pod smartfony — menu jest zawsze widoczne i wygodne.
+            Dodawaj grupy, podgrupy, linki poza grupami, zmieniaj kolejność, eksportuj dane do JSON
+            i odświeżaj zawartość z pliku. Ta wersja jest przygotowana pod GitHub Pages i dopracowana
+            dla desktopu oraz smartfonów.
           </p>
         </div>
 
@@ -641,7 +744,7 @@
             <div class="value" id="statGroupedLinks">0</div>
           </div>
           <div class="stat">
-            <div class="label">Linki poza grupami</div>
+            <div class="label">Poza grupami</div>
             <div class="value" id="statUngroupedLinks">0</div>
           </div>
         </div>
@@ -651,18 +754,29 @@
     <section class="panel">
       <div class="panel-head">
         <div>
-          <h2>Zawartość strony</h2>
+          <h2>Zawartość</h2>
           <p id="summaryText">Ładowanie danych...</p>
+        </div>
+
+        <div class="toolbar">
+          <button class="chip-btn active" id="filterAllBtn" type="button">Wszystko</button>
+          <button class="chip-btn" id="filterUngroupedBtn" type="button">Tylko poza grupami</button>
+          <button class="chip-btn" id="filterGroupedBtn" type="button">Tylko grupy</button>
         </div>
       </div>
 
       <div class="notice">
-        Na telefonie menu otwiera się jako duży dolny panel, dzięki czemu jest dobrze widoczne.
-        Linki poza grupami możesz układać ręcznie i później łatwo przenosić do dowolnej grupy.
+        Na smartfonie menu otwiera się jako czytelny panel od dołu. Wyszukiwarka filtruje grupy, podgrupy i linki.
+        Dane możesz edytować lokalnie, a potem wyeksportować do pliku JSON do GitHub Pages.
       </div>
 
       <div id="groupsContainer" class="groups"></div>
     </section>
+
+    <footer class="footer">
+      Wskazówka produkcyjna: trzymaj plik <strong>index.html</strong> oraz <strong>data.json</strong> w tym samym katalogu repozytorium GitHub Pages.
+      W ustawieniach JSON ustaw ścieżkę <strong>./data.json</strong>.
+    </footer>
   </div>
 
   <div class="mobile-menu-backdrop" id="mobileMenuBackdrop"></div>
@@ -736,14 +850,16 @@
       </div>
 
       <form id="groupForm">
-        <div class="field">
-          <label for="newGroupName">Nazwa grupy</label>
-          <input id="newGroupName" type="text" placeholder="Np. 吹田南小学校" required />
-        </div>
+        <div class="form-grid">
+          <div class="field full">
+            <label for="newGroupName">Nazwa grupy</label>
+            <input id="newGroupName" type="text" placeholder="Np. 吹田南小学校" required />
+          </div>
 
-        <div class="field">
-          <label for="newSubgroupName">Pierwsza podgrupa (opcjonalnie)</label>
-          <input id="newSubgroupName" type="text" placeholder="Np. Ogólne" />
+          <div class="field full">
+            <label for="newSubgroupName">Pierwsza podgrupa (opcjonalnie)</label>
+            <input id="newSubgroupName" type="text" placeholder="Np. Ogólne" />
+          </div>
         </div>
 
         <div class="modal-actions">
@@ -765,11 +881,11 @@
 
       <div class="modal-actions">
         <button class="btn success" type="button" id="copyJsonBtn">Kopiuj JSON</button>
-        <button class="btn secondary" type="button" id="downloadJsonBtn">Pobierz plik JSON</button>
+        <button class="btn secondary" type="button" id="downloadJsonBtn">Pobierz data.json</button>
       </div>
 
       <div class="helper">
-        Skopiuj zawartość albo pobierz plik <strong>data.json</strong> i wgraj go na GitHub Pages.
+        Użyj pobranego pliku jako <strong>data.json</strong> w repozytorium GitHub Pages.
       </div>
     </div>
   </dialog>
@@ -784,15 +900,24 @@
       <div class="field">
         <label for="jsonUrlInput">Adres pliku JSON</label>
         <input id="jsonUrlInput" type="text" placeholder="./data.json" />
+        <div class="field-hint">Najlepiej użyj: <strong>./data.json</strong></div>
+      </div>
+
+      <div class="field">
+        <label for="autoloadJsonToggle">Automatycznie próbuj wczytać JSON przy starcie</label>
+        <select id="autoloadJsonToggle">
+          <option value="true">Tak</option>
+          <option value="false">Nie</option>
+        </select>
       </div>
 
       <div class="modal-actions">
-        <button class="btn primary" type="button" id="saveJsonUrlBtn">Zapisz ustawienie</button>
+        <button class="btn primary" type="button" id="saveJsonUrlBtn">Zapisz ustawienia</button>
         <button class="btn warning" type="button" id="loadJsonNowBtn">Wczytaj teraz z JSON</button>
       </div>
 
       <div class="helper">
-        Wpisz np. <strong>./data.json</strong>. Po wgraniu nowego pliku możesz użyć odświeżania z menu.
+        Jeśli JSON nie jest dostępny, strona zachowa lokalne dane z przeglądarki.
       </div>
 
       <div id="statusBox" class="status info"></div>
@@ -800,52 +925,67 @@
   </dialog>
 
   <script>
-    const APP_STORAGE_KEY = "ict-supporter-final-v1";
+    const APP_STORAGE_KEY = "ict-supporter-production-v1";
     const JSON_URL_STORAGE_KEY = "ict-supporter-json-url-v1";
+    const JSON_AUTOLOAD_STORAGE_KEY = "ict-supporter-json-autoload-v1";
 
     const state = {
       data: {
         title: "ICTサポーター",
-        ungroupedLinks: [
-          {
-            id: createId(),
-            title: "Link poza grupą",
-            url: "https://example.com",
-            description: "Taki link możesz później przenieść do grupy."
-          }
-        ],
-        groups: [
-          {
-            id: createId(),
-            name: "吹田南小学校",
-            subgroups: [
-              {
-                id: createId(),
-                name: "Ogólne",
-                links: []
-              }
-            ]
-          },
-          {
-            id: createId(),
-            name: "青山台中学校",
-            subgroups: [
-              {
-                id: createId(),
-                name: "Ogólne",
-                links: []
-              }
-            ]
-          }
-        ]
+        ungroupedLinks: [],
+        groups: []
       },
       editing: {
         mode: null,
         groupId: null,
         subgroupId: null,
         linkId: null
+      },
+      ui: {
+        search: "",
+        filter: "all"
       }
     };
+
+    const DEFAULT_DATA = {
+      title: "ICTサポーター",
+      ungroupedLinks: [
+        {
+          id: createId(),
+          title: "Przykładowy link poza grupą",
+          url: "https://example.com",
+          description: "Możesz go edytować, usunąć albo przenieść do grupy."
+        }
+      ],
+      groups: [
+        {
+          id: createId(),
+          name: "吹田南小学校",
+          subgroups: [
+            {
+              id: createId(),
+              name: "Ogólne",
+              links: [
+                {
+                  id: createId(),
+                  title: "Przykładowa podstrona",
+                  url: "https://example.com/suita",
+                  description: "Przykładowy link w grupie."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    };
+
+    const MENU_ACTIONS = [
+      { id: "add-link", label: "Dodaj link" },
+      { id: "add-group", label: "Dodaj grupę" },
+      { id: "export-json", label: "Eksport do JSON" },
+      { id: "refresh-json", label: "Odświeżanie z JSON" },
+      { id: "settings-json", label: "Ustawienia JSON" }
+    ];
 
     const el = {
       menuToggle: document.getElementById("menuToggle"),
@@ -855,6 +995,12 @@
       mobileMenuSheet: document.getElementById("mobileMenuSheet"),
       mobileMenuList: document.getElementById("mobileMenuList"),
       closeMobileMenuBtn: document.getElementById("closeMobileMenuBtn"),
+
+      searchInput: document.getElementById("searchInput"),
+      searchClearBtn: document.getElementById("searchClearBtn"),
+      filterAllBtn: document.getElementById("filterAllBtn"),
+      filterUngroupedBtn: document.getElementById("filterUngroupedBtn"),
+      filterGroupedBtn: document.getElementById("filterGroupedBtn"),
 
       groupsContainer: document.getElementById("groupsContainer"),
       summaryText: document.getElementById("summaryText"),
@@ -890,21 +1036,18 @@
 
       settingsDialog: document.getElementById("settingsDialog"),
       jsonUrlInput: document.getElementById("jsonUrlInput"),
+      autoloadJsonToggle: document.getElementById("autoloadJsonToggle"),
       saveJsonUrlBtn: document.getElementById("saveJsonUrlBtn"),
       loadJsonNowBtn: document.getElementById("loadJsonNowBtn"),
       statusBox: document.getElementById("statusBox")
     };
 
-    const MENU_ACTIONS = [
-      { id: "add-link", label: "Dodaj link" },
-      { id: "add-group", label: "Dodaj grupę" },
-      { id: "export-json", label: "Eksport do JSON" },
-      { id: "refresh-json", label: "Odświeżanie z JSON" },
-      { id: "settings-json", label: "Ustawienia JSON" }
-    ];
-
     function createId() {
       return crypto.randomUUID ? crypto.randomUUID() : "id-" + Date.now() + "-" + Math.random().toString(16).slice(2);
+    }
+
+    function cloneDefaultData() {
+      return JSON.parse(JSON.stringify(DEFAULT_DATA));
     }
 
     function saveState() {
@@ -913,12 +1056,17 @@
 
     function loadState() {
       const raw = localStorage.getItem(APP_STORAGE_KEY);
-      if (!raw) return;
+      if (!raw) {
+        state.data = cloneDefaultData();
+        saveState();
+        return;
+      }
+
       try {
         const parsed = JSON.parse(raw);
-        if (isValidData(parsed)) state.data = normalizeData(parsed);
-      } catch (e) {
-        console.error("Błąd wczytywania localStorage:", e);
+        state.data = isValidData(parsed) ? normalizeData(parsed) : cloneDefaultData();
+      } catch {
+        state.data = cloneDefaultData();
       }
     }
 
@@ -928,6 +1076,14 @@
 
     function saveJsonUrl(url) {
       localStorage.setItem(JSON_URL_STORAGE_KEY, url);
+    }
+
+    function getJsonAutoload() {
+      return localStorage.getItem(JSON_AUTOLOAD_STORAGE_KEY) !== "false";
+    }
+
+    function saveJsonAutoload(value) {
+      localStorage.setItem(JSON_AUTOLOAD_STORAGE_KEY, String(value));
     }
 
     function isValidData(data) {
@@ -1043,13 +1199,81 @@
       `).join("");
     }
 
-    function renderUngroupedSection() {
+    function stringMatch(value, needle) {
+      return (value || "").toLowerCase().includes(needle);
+    }
+
+    function linkMatches(link, query, groupName = "", subgroupName = "") {
+      if (!query) return true;
+      return [
+        link.title,
+        link.url,
+        link.description,
+        groupName,
+        subgroupName
+      ].some(value => stringMatch(value, query));
+    }
+
+    function getVisibleData() {
+      const query = state.ui.search.trim().toLowerCase();
+      const filter = state.ui.filter;
+
+      const visibleUngrouped = state.data.ungroupedLinks.filter(link => {
+        const matches = linkMatches(link, query);
+        return filter === "all" ? matches : filter === "ungrouped" ? matches : false;
+      });
+
+      const visibleGroups = filter === "ungrouped"
+        ? []
+        : state.data.groups
+            .map(group => {
+              const subgroups = group.subgroups
+                .map(subgroup => {
+                  const links = subgroup.links.filter(link => linkMatches(link, query, group.name, subgroup.name));
+                  const subgroupMatch = query && stringMatch(subgroup.name, query);
+                  const groupMatch = query && stringMatch(group.name, query);
+
+                  if (groupMatch || subgroupMatch) {
+                    return { ...subgroup, links: subgroup.links };
+                  }
+
+                  return { ...subgroup, links };
+                })
+                .filter(subgroup => subgroup.links.length > 0 || (!query && subgroup.links.length >= 0));
+
+              const groupMatch = query && stringMatch(group.name, query);
+
+              if (groupMatch && query) {
+                return group;
+              }
+
+              return { ...group, subgroups };
+            })
+            .filter(group => {
+              if (!query) return filter === "grouped" || filter === "all";
+              return stringMatch(group.name, query) || group.subgroups.some(subgroup => {
+                return stringMatch(subgroup.name, query) || subgroup.links.length > 0;
+              });
+            });
+
+      return { visibleUngrouped, visibleGroups };
+    }
+
+    function renderFilterButtons() {
+      el.filterAllBtn.classList.toggle("active", state.ui.filter === "all");
+      el.filterUngroupedBtn.classList.toggle("active", state.ui.filter === "ungrouped");
+      el.filterGroupedBtn.classList.toggle("active", state.ui.filter === "grouped");
+    }
+
+    function renderUngroupedSection(links) {
+      if (state.ui.filter === "grouped") return "";
+
       return `
         <section class="section-card">
           <div class="group-header">
             <div class="group-title-wrap">
               <h3>Linki poza grupami</h3>
-              <div class="group-meta">${state.data.ungroupedLinks.length} linków</div>
+              <div class="group-meta">${links.length} widocznych linków</div>
             </div>
             <div class="link-actions">
               <button class="small-btn secondary" onclick="openAddUngrouped()">Dodaj link poza grupą</button>
@@ -1058,28 +1282,37 @@
 
           <div class="subgroups">
             ${
-              state.data.ungroupedLinks.length
+              links.length
                 ? `<div class="links-list">
-                    ${state.data.ungroupedLinks.map((link, index) => `
-                      <article class="link-card">
-                        <div class="link-main">
-                          <h5>${escapeHtml(link.title)}</h5>
-                          <div class="link-url">${escapeHtml(link.url)}</div>
-                          <div class="link-desc">${escapeHtml(link.description || "Brak opisu.")}</div>
-                        </div>
-                        <div class="link-actions">
-                          <a class="small-btn success" href="${escapeHtml(link.url)}" target="_blank" rel="noopener noreferrer">Otwórz</a>
-                          <button class="icon-btn secondary" onclick="moveUngroupedLink('${link.id}',-1)" ${index === 0 ? "disabled" : ""}>↑</button>
-                          <button class="icon-btn secondary" onclick="moveUngroupedLink('${link.id}',1)" ${index === state.data.ungroupedLinks.length - 1 ? "disabled" : ""}>↓</button>
-                          <button class="small-btn warning" onclick="moveUngroupedToGroupPrompt('${link.id}')">Przenieś do grupy</button>
-                          <button class="small-btn warning" onclick="editUngroupedLink('${link.id}')">Edytuj</button>
-                          <button class="small-btn danger" onclick="deleteUngroupedLink('${link.id}')">Usuń</button>
-                        </div>
-                      </article>
-                    `).join("")}
+                    ${links.map((link, index) => {
+                      const originalIndex = state.data.ungroupedLinks.findIndex(item => item.id === link.id);
+                      const canMoveUp = originalIndex > 0;
+                      const canMoveDown = originalIndex < state.data.ungroupedLinks.length - 1;
+
+                      return `
+                        <article class="link-card">
+                          <div class="link-main">
+                            <h5>${escapeHtml(link.title)}</h5>
+                            <div class="link-url">${escapeHtml(link.url)}</div>
+                            <div class="link-desc">${escapeHtml(link.description || "Brak opisu.")}</div>
+                            <div class="link-tags">
+                              <span class="tag">Poza grupami</span>
+                            </div>
+                          </div>
+                          <div class="link-actions">
+                            <a class="small-btn success" href="${escapeHtml(link.url)}" target="_blank" rel="noopener noreferrer">Otwórz</a>
+                            <button class="icon-btn secondary" onclick="moveUngroupedLink('${link.id}',-1)" ${canMoveUp ? "" : "disabled"}>↑</button>
+                            <button class="icon-btn secondary" onclick="moveUngroupedLink('${link.id}',1)" ${canMoveDown ? "" : "disabled"}>↓</button>
+                            <button class="small-btn warning" onclick="moveUngroupedToGroupPrompt('${link.id}')">Przenieś do grupy</button>
+                            <button class="small-btn warning" onclick="editUngroupedLink('${link.id}')">Edytuj</button>
+                            <button class="small-btn danger" onclick="deleteUngroupedLink('${link.id}')">Usuń</button>
+                          </div>
+                        </article>
+                      `;
+                    }).join("")}
                   </div>`
                 : `<div class="empty-state">
-                    <p>Nie ma jeszcze linków poza grupami.</p>
+                    <p>Brak linków poza grupami dla aktualnego widoku.</p>
                   </div>`
             }
           </div>
@@ -1087,17 +1320,19 @@
       `;
     }
 
-    function renderGroupsSection() {
-      if (!state.data.groups.length) {
+    function renderGroupsSection(groups) {
+      if (state.ui.filter === "ungrouped") return "";
+
+      if (!groups.length) {
         return `
           <div class="empty-state">
-            <p>Brak grup.</p>
-            <p>Dodaj grupę z menu albo dodaj link do nowej grupy.</p>
+            <p>Brak grup lub wyników wyszukiwania.</p>
+            <p>Dodaj grupę z menu albo wyczyść filtr wyszukiwania.</p>
           </div>
         `;
       }
 
-      return state.data.groups.map(group => {
+      return groups.map(group => {
         const groupLinksCount = group.subgroups.reduce((acc, subgroup) => acc + subgroup.links.length, 0);
 
         return `
@@ -1105,7 +1340,7 @@
             <div class="group-header">
               <div class="group-title-wrap">
                 <h3>${escapeHtml(group.name)}</h3>
-                <div class="group-meta">${group.subgroups.length} podgrup • ${groupLinksCount} linków</div>
+                <div class="group-meta">${group.subgroups.length} podgrup • ${groupLinksCount} widocznych linków</div>
               </div>
               <div class="link-actions">
                 <button class="small-btn secondary" onclick="openAddForGroup('${group.id}')">Dodaj link</button>
@@ -1119,7 +1354,7 @@
                   <div class="subgroup-head">
                     <div>
                       <h4>${escapeHtml(subgroup.name)}</h4>
-                      <div class="subgroup-meta">${subgroup.links.length} linków</div>
+                      <div class="subgroup-meta">${subgroup.links.length} widocznych linków</div>
                     </div>
                     <div class="link-actions">
                       <button class="small-btn secondary" onclick="openAddForSubgroup('${group.id}','${subgroup.id}')">Dodaj link</button>
@@ -1130,26 +1365,35 @@
                   ${
                     subgroup.links.length
                       ? `<div class="links-list">
-                          ${subgroup.links.map((link, index) => `
-                            <article class="link-card">
-                              <div class="link-main">
-                                <h5>${escapeHtml(link.title)}</h5>
-                                <div class="link-url">${escapeHtml(link.url)}</div>
-                                <div class="link-desc">${escapeHtml(link.description || "Brak opisu.")}</div>
-                              </div>
-                              <div class="link-actions">
-                                <a class="small-btn success" href="${escapeHtml(link.url)}" target="_blank" rel="noopener noreferrer">Otwórz</a>
-                                <button class="icon-btn secondary" onclick="moveGroupedLink('${group.id}','${subgroup.id}','${link.id}',-1)" ${index === 0 ? "disabled" : ""}>↑</button>
-                                <button class="icon-btn secondary" onclick="moveGroupedLink('${group.id}','${subgroup.id}','${link.id}',1)" ${index === subgroup.links.length - 1 ? "disabled" : ""}>↓</button>
-                                <button class="small-btn warning" onclick="editGroupedLink('${group.id}','${subgroup.id}','${link.id}')">Edytuj</button>
-                                <button class="small-btn danger" onclick="deleteGroupedLink('${group.id}','${subgroup.id}','${link.id}')">Usuń</button>
-                              </div>
-                            </article>
-                          `).join("")}
+                          ${subgroup.links.map(link => {
+                            const originalSubgroup = state.data.groups.find(g => g.id === group.id)?.subgroups.find(s => s.id === subgroup.id);
+                            const originalIndex = originalSubgroup?.links.findIndex(item => item.id === link.id) ?? -1;
+                            const canMoveUp = originalIndex > 0;
+                            const canMoveDown = originalIndex > -1 && originalIndex < (originalSubgroup?.links.length ?? 0) - 1;
+
+                            return `
+                              <article class="link-card">
+                                <div class="link-main">
+                                  <h5>${escapeHtml(link.title)}</h5>
+                                  <div class="link-url">${escapeHtml(link.url)}</div>
+                                  <div class="link-desc">${escapeHtml(link.description || "Brak opisu.")}</div>
+                                  <div class="link-tags">
+                                    <span class="tag">${escapeHtml(group.name)}</span>
+                                    <span class="tag">${escapeHtml(subgroup.name)}</span>
+                                  </div>
+                                </div>
+                                <div class="link-actions">
+                                  <a class="small-btn success" href="${escapeHtml(link.url)}" target="_blank" rel="noopener noreferrer">Otwórz</a>
+                                  <button class="icon-btn secondary" onclick="moveGroupedLink('${group.id}','${subgroup.id}','${link.id}',-1)" ${canMoveUp ? "" : "disabled"}>↑</button>
+                                  <button class="icon-btn secondary" onclick="moveGroupedLink('${group.id}','${subgroup.id}','${link.id}',1)" ${canMoveDown ? "" : "disabled"}>↓</button>
+                                  <button class="small-btn warning" onclick="editGroupedLink('${group.id}','${subgroup.id}','${link.id}')">Edytuj</button>
+                                  <button class="small-btn danger" onclick="deleteGroupedLink('${group.id}','${subgroup.id}','${link.id}')">Usuń</button>
+                                </div>
+                              </article>
+                            `;
+                          }).join("")}
                         </div>`
-                      : `<div class="empty-state">
-                          <p>Ta podgrupa nie ma jeszcze linków.</p>
-                        </div>`
+                      : `<div class="muted-box">Brak linków w tej podgrupie dla aktualnego widoku.</div>`
                   }
                 </div>
               `).join("")}
@@ -1165,7 +1409,16 @@
       renderSuggestions();
       renderMenuButtons(el.desktopMenuList);
       renderMenuButtons(el.mobileMenuList);
-      el.groupsContainer.innerHTML = renderUngroupedSection() + renderGroupsSection();
+      renderFilterButtons();
+
+      const { visibleUngrouped, visibleGroups } = getVisibleData();
+      const content = renderUngroupedSection(visibleUngrouped) + renderGroupsSection(visibleGroups);
+      el.groupsContainer.innerHTML = content || `
+        <div class="empty-state">
+          <p>Brak wyników.</p>
+          <p>Spróbuj zmienić wyszukiwanie lub filtr.</p>
+        </div>
+      `;
     }
 
     function exportJsonString() {
@@ -1177,20 +1430,28 @@
       el.statusBox.textContent = message;
     }
 
-    async function loadFromJson(url = getJsonUrl()) {
+    async function loadFromJson(url = getJsonUrl(), options = {}) {
+      const { silent = false } = options;
+
       try {
-        setStatus(`Wczytywanie danych z: ${url}`, "info");
+        if (!silent) setStatus(`Wczytywanie danych z: ${url}`, "info");
+
         const response = await fetch(url, { cache: "no-store" });
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
         const json = await response.json();
         if (!isValidData(json)) throw new Error("Nieprawidłowy format JSON");
+
         state.data = normalizeData(json);
         saveState();
         render();
-        setStatus("Dane zostały odświeżone z JSON.", "success");
+
+        if (!silent) setStatus("Dane zostały odświeżone z JSON.", "success");
+        return true;
       } catch (error) {
         console.error(error);
-        setStatus(`Nie udało się wczytać JSON: ${error.message}`, "error");
+        if (!silent) setStatus(`Nie udało się wczytać JSON: ${error.message}`, "error");
+        return false;
       }
     }
 
@@ -1287,6 +1548,7 @@
 
       if (actionId === "settings-json") {
         el.jsonUrlInput.value = getJsonUrl();
+        el.autoloadJsonToggle.value = String(getJsonAutoload());
         setStatus("Tutaj ustawisz adres pliku JSON.", "info");
         openDialog(el.settingsDialog);
       }
@@ -1327,6 +1589,32 @@
 
     el.placementType.addEventListener("change", toggleGroupFields);
 
+    el.searchInput.addEventListener("input", () => {
+      state.ui.search = el.searchInput.value;
+      render();
+    });
+
+    el.searchClearBtn.addEventListener("click", () => {
+      state.ui.search = "";
+      el.searchInput.value = "";
+      render();
+    });
+
+    el.filterAllBtn.addEventListener("click", () => {
+      state.ui.filter = "all";
+      render();
+    });
+
+    el.filterUngroupedBtn.addEventListener("click", () => {
+      state.ui.filter = "ungrouped";
+      render();
+    });
+
+    el.filterGroupedBtn.addEventListener("click", () => {
+      state.ui.filter = "grouped";
+      render();
+    });
+
     el.linkForm.addEventListener("submit", (event) => {
       event.preventDefault();
 
@@ -1338,6 +1626,11 @@
       const subgroupName = el.subgroupName.value.trim();
 
       if (!title || !url) return;
+
+      if (placement === "grouped" && (!groupName || !subgroupName)) {
+        alert("Dla linku w grupie podaj nazwę grupy i podgrupy.");
+        return;
+      }
 
       if (state.editing.mode === "edit-ungrouped") {
         const index = state.data.ungroupedLinks.findIndex(link => link.id === state.editing.linkId);
@@ -1424,7 +1717,8 @@
         return;
       }
       saveJsonUrl(url);
-      setStatus("Adres pliku JSON został zapisany.", "success");
+      saveJsonAutoload(el.autoloadJsonToggle.value === "true");
+      setStatus("Ustawienia JSON zostały zapisane.", "success");
     });
 
     el.loadJsonNowBtn.addEventListener("click", async () => {
@@ -1434,6 +1728,7 @@
         return;
       }
       saveJsonUrl(url);
+      saveJsonAutoload(el.autoloadJsonToggle.value === "true");
       await loadFromJson(url);
     });
 
@@ -1571,9 +1866,17 @@
       render();
     };
 
-    loadState();
-    toggleGroupFields();
-    render();
+    async function init() {
+      loadState();
+      toggleGroupFields();
+      render();
+
+      if (getJsonAutoload()) {
+        await loadFromJson(getJsonUrl(), { silent: true });
+      }
+    }
+
+    init();
   </script>
 </body>
 </html>

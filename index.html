@@ -1,1 +1,1187 @@
-test
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ICTサポーター</title>
+  <style>
+    :root {
+      --bg1: #020617;
+      --bg2: #0f172a;
+      --panel: rgba(15, 23, 42, 0.82);
+      --card: rgba(30, 41, 59, 0.88);
+      --soft: rgba(51, 65, 85, 0.45);
+      --border: rgba(148, 163, 184, 0.22);
+      --text: #f8fafc;
+      --muted: #cbd5e1;
+      --accent: #38bdf8;
+      --accent2: #2563eb;
+      --green: #22c55e;
+      --green2: #15803d;
+      --danger: #ef4444;
+      --danger2: #b91c1c;
+      --warning: #f59e0b;
+      --shadow: 0 22px 55px rgba(0, 0, 0, 0.35);
+      --radius: 20px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      min-height: 100%;
+      font-family: Inter, Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(56, 189, 248, 0.18), transparent 28%),
+        radial-gradient(circle at top right, rgba(34, 197, 94, 0.10), transparent 24%),
+        linear-gradient(135deg, var(--bg1), var(--bg2) 45%, #111827);
+    }
+
+    body {
+      min-height: 100vh;
+    }
+
+    .container {
+      width: min(1200px, calc(100% - 28px));
+      margin: 0 auto;
+      padding: 24px 0 56px;
+    }
+
+    .topbar {
+      display: flex;
+      gap: 16px;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 20px;
+      border-radius: 24px;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      backdrop-filter: blur(14px);
+      box-shadow: var(--shadow);
+      position: sticky;
+      top: 12px;
+      z-index: 20;
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .brand h1 {
+      margin: 0;
+      font-size: clamp(1.6rem, 4vw, 2.8rem);
+      letter-spacing: 0.02em;
+    }
+
+    .brand p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .menu-wrap {
+      position: relative;
+    }
+
+    .menu-btn, .btn, .small-btn, .icon-btn {
+      border: none;
+      color: #fff;
+      cursor: pointer;
+      transition: transform .15s ease, opacity .15s ease, background .2s ease;
+    }
+
+    .menu-btn:hover, .btn:hover, .small-btn:hover, .icon-btn:hover {
+      transform: translateY(-1px);
+      opacity: .96;
+    }
+
+    .menu-btn {
+      border-radius: 14px;
+      padding: 12px 18px;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow: 0 10px 24px rgba(37, 99, 235, 0.25);
+    }
+
+    .dropdown {
+      position: absolute;
+      right: 0;
+      top: calc(100% + 12px);
+      width: min(360px, calc(100vw - 40px));
+      background: rgba(15, 23, 42, 0.98);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      padding: 12px;
+      display: none;
+      backdrop-filter: blur(14px);
+    }
+
+    .dropdown.open {
+      display: block;
+    }
+
+    .dropdown h3 {
+      margin: 4px 8px 10px;
+      font-size: 1rem;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .menu-list {
+      display: grid;
+      gap: 8px;
+    }
+
+    .menu-item {
+      width: 100%;
+      text-align: left;
+      border-radius: 12px;
+      padding: 12px 14px;
+      background: rgba(30, 41, 59, 0.9);
+      color: var(--text);
+      border: 1px solid transparent;
+      cursor: pointer;
+      font-size: 0.95rem;
+    }
+
+    .menu-item:hover {
+      border-color: var(--accent);
+      background: rgba(30, 41, 59, 1);
+    }
+
+    .panel {
+      margin-top: 22px;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 22px;
+      backdrop-filter: blur(14px);
+      box-shadow: var(--shadow);
+    }
+
+    .panel-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+
+    .panel-head h2 {
+      margin: 0;
+      font-size: 1.25rem;
+    }
+
+    .panel-head p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .notice {
+      margin-top: 12px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: rgba(15, 23, 42, 0.58);
+      color: var(--muted);
+      border: 1px solid var(--border);
+      line-height: 1.5;
+      font-size: 0.92rem;
+    }
+
+    .groups {
+      display: grid;
+      gap: 18px;
+    }
+
+    .group-card {
+      background: rgba(15, 23, 42, 0.45);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    .group-header {
+      padding: 18px 18px 12px;
+      background: linear-gradient(180deg, rgba(56, 189, 248, 0.10), transparent);
+      border-bottom: 1px solid rgba(148, 163, 184, 0.12);
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .group-title-wrap h3 {
+      margin: 0;
+      font-size: 1.25rem;
+    }
+
+    .group-meta {
+      color: var(--muted);
+      font-size: 0.92rem;
+      margin-top: 6px;
+    }
+
+    .subgroups {
+      display: grid;
+      gap: 14px;
+      padding: 16px;
+    }
+
+    .subgroup-card {
+      background: rgba(30, 41, 59, 0.75);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 16px;
+    }
+
+    .subgroup-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+
+    .subgroup-head h4 {
+      margin: 0;
+      font-size: 1.05rem;
+    }
+
+    .subgroup-meta {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .links-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .link-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 14px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 12px;
+      align-items: start;
+    }
+
+    .link-main h5 {
+      margin: 0 0 6px;
+      font-size: 1rem;
+    }
+
+    .link-url {
+      color: #93c5fd;
+      word-break: break-word;
+      font-size: 0.92rem;
+      margin-bottom: 8px;
+    }
+
+    .link-desc {
+      color: var(--muted);
+      font-size: 0.93rem;
+      line-height: 1.5;
+    }
+
+    .link-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      align-content: start;
+    }
+
+    .btn, .small-btn, .icon-btn {
+      border-radius: 12px;
+      font-weight: 700;
+    }
+
+    .btn {
+      padding: 11px 16px;
+    }
+
+    .small-btn {
+      padding: 9px 12px;
+      font-size: 0.88rem;
+    }
+
+    .icon-btn {
+      padding: 9px 11px;
+      font-size: 0.88rem;
+      min-width: 42px;
+    }
+
+    .primary { background: linear-gradient(135deg, var(--accent), var(--accent2)); }
+    .success { background: linear-gradient(135deg, var(--green), var(--green2)); }
+    .danger { background: linear-gradient(135deg, var(--danger), var(--danger2)); }
+    .secondary { background: linear-gradient(135deg, #64748b, #475569); }
+    .warning { background: linear-gradient(135deg, #f59e0b, #d97706); }
+
+    .empty-state {
+      padding: 30px 20px;
+      text-align: center;
+      border: 1px dashed var(--border);
+      border-radius: 18px;
+      color: var(--muted);
+      background: rgba(15, 23, 42, 0.32);
+    }
+
+    dialog {
+      width: min(760px, calc(100% - 24px));
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      background: rgba(15, 23, 42, 0.98);
+      color: var(--text);
+      box-shadow: var(--shadow);
+      padding: 0;
+    }
+
+    dialog::backdrop {
+      background: rgba(2, 6, 23, 0.7);
+      backdrop-filter: blur(3px);
+    }
+
+    .modal-content {
+      padding: 22px;
+    }
+
+    .modal-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+
+    .modal-head h2 {
+      margin: 0;
+      font-size: 1.25rem;
+    }
+
+    .close-btn {
+      background: transparent;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 10px 12px;
+      cursor: pointer;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .full {
+      grid-column: 1 / -1;
+    }
+
+    .field {
+      display: grid;
+      gap: 8px;
+    }
+
+    .field label {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .field input, .field textarea, .field select {
+      width: 100%;
+      border: 1px solid var(--border);
+      background: rgba(15, 23, 42, 0.9);
+      color: var(--text);
+      border-radius: 12px;
+      padding: 12px 14px;
+      font-size: 0.95rem;
+      outline: none;
+    }
+
+    .field textarea {
+      min-height: 96px;
+      resize: vertical;
+    }
+
+    .field input:focus, .field textarea:focus, .field select:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.18);
+    }
+
+    .modal-actions {
+      margin-top: 18px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .json-box {
+      width: 100%;
+      min-height: 320px;
+      padding: 14px;
+      background: rgba(15, 23, 42, 0.95);
+      color: #e2e8f0;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      resize: vertical;
+    }
+
+    .helper {
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.6;
+    }
+
+    .status {
+      margin-top: 14px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      font-size: 0.92rem;
+      display: none;
+    }
+
+    .status.show { display: block; }
+    .status.info {
+      background: rgba(56, 189, 248, 0.12);
+      color: #bae6fd;
+      border: 1px solid rgba(56, 189, 248, 0.25);
+    }
+    .status.error {
+      background: rgba(239, 68, 68, 0.12);
+      color: #fecaca;
+      border: 1px solid rgba(239, 68, 68, 0.25);
+    }
+    .status.success {
+      background: rgba(34, 197, 94, 0.12);
+      color: #bbf7d0;
+      border: 1px solid rgba(34, 197, 94, 0.25);
+    }
+
+    @media (max-width: 860px) {
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .link-card {
+        grid-template-columns: 1fr;
+      }
+
+      .link-actions {
+        justify-content: flex-start;
+      }
+
+      .topbar {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="topbar">
+      <div class="brand">
+        <h1>ICTサポーター</h1>
+        <p>Strona z grupami, podgrupami i linkami ładowanymi z pliku JSON.</p>
+      </div>
+
+      <div class="menu-wrap">
+        <button class="menu-btn" id="menuToggle">☰ Menu</button>
+        <div class="dropdown" id="dropdownMenu">
+          <h3>Akcje</h3>
+          <div class="menu-list">
+            <button class="menu-item" id="openEditorBtn">Dodaj lub edytuj link</button>
+            <button class="menu-item" id="openJsonExportBtn">Eksport do JSON</button>
+            <button class="menu-item" id="refreshJsonBtn">Odświeżanie z JSON</button>
+            <button class="menu-item" id="openSettingsBtn">Ustawienia JSON</button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section class="panel">
+      <div class="panel-head">
+        <div>
+          <h2>Lista grup i podstron</h2>
+          <p id="summaryText">Ładowanie danych...</p>
+        </div>
+      </div>
+
+      <div class="notice">
+        Nowy link automatycznie trafi do wybranej grupy i podgrupy. Kolejność linków możesz zmieniać ręcznie przyciskami ↑ i ↓.
+        Dane na stronie pochodzą z lokalnego stanu oraz mogą być odświeżane z pliku JSON podanego w ustawieniach.
+      </div>
+
+      <div id="groupsContainer" class="groups"></div>
+    </section>
+  </div>
+
+  <dialog id="editorDialog">
+    <div class="modal-content">
+      <div class="modal-head">
+        <h2 id="editorTitle">Dodaj link</h2>
+        <button class="close-btn" type="button" data-close="editorDialog">Zamknij</button>
+      </div>
+
+      <form id="linkForm">
+        <div class="form-grid">
+          <div class="field">
+            <label for="groupName">Grupa</label>
+            <input id="groupName" list="groupSuggestions" placeholder="Np. 吹田南小学校" required />
+            <datalist id="groupSuggestions"></datalist>
+          </div>
+
+          <div class="field">
+            <label for="subgroupName">Podgrupa</label>
+            <input id="subgroupName" list="subgroupSuggestions" placeholder="Np. Nauczyciele / Dokumenty / Klasy" required />
+            <datalist id="subgroupSuggestions"></datalist>
+          </div>
+
+          <div class="field full">
+            <label for="linkTitle">Tytuł linku</label>
+            <input id="linkTitle" type="text" placeholder="Np. Plan lekcji" required />
+          </div>
+
+          <div class="field full">
+            <label for="linkUrl">Adres URL</label>
+            <input id="linkUrl" type="url" placeholder="Np. https://example.com/plan" required />
+          </div>
+
+          <div class="field full">
+            <label for="linkDescription">Opis</label>
+            <textarea id="linkDescription" placeholder="Krótki opis linku"></textarea>
+          </div>
+        </div>
+
+        <div class="modal-actions">
+          <button type="submit" class="btn primary" id="saveLinkBtn">Zapisz</button>
+          <button type="button" class="btn secondary" id="cancelEditBtn">Anuluj</button>
+        </div>
+      </form>
+    </div>
+  </dialog>
+
+  <dialog id="jsonDialog">
+    <div class="modal-content">
+      <div class="modal-head">
+        <h2>Eksport do JSON</h2>
+        <button class="close-btn" type="button" data-close="jsonDialog">Zamknij</button>
+      </div>
+
+      <textarea id="jsonOutput" class="json-box" readonly></textarea>
+
+      <div class="modal-actions">
+        <button class="btn success" type="button" id="copyJsonBtn">Kopiuj JSON</button>
+        <button class="btn secondary" type="button" id="downloadJsonBtn">Pobierz plik JSON</button>
+      </div>
+
+      <div class="helper">
+        Skopiuj ten JSON i wklej go do pliku, np. <strong>data.json</strong>, a potem wrzuć na GitHub.
+      </div>
+    </div>
+  </dialog>
+
+  <dialog id="settingsDialog">
+    <div class="modal-content">
+      <div class="modal-head">
+        <h2>Ustawienia JSON</h2>
+        <button class="close-btn" type="button" data-close="settingsDialog">Zamknij</button>
+      </div>
+
+      <div class="field">
+        <label for="jsonUrlInput">Adres pliku JSON</label>
+        <input id="jsonUrlInput" type="text" placeholder="Np. ./data.json albo pełny URL do pliku JSON" />
+      </div>
+
+      <div class="modal-actions">
+        <button class="btn primary" type="button" id="saveJsonUrlBtn">Zapisz ustawienie</button>
+        <button class="btn warning" type="button" id="loadJsonNowBtn">Wczytaj teraz z JSON</button>
+      </div>
+
+      <div class="helper">
+        Jeśli wrzucisz plik JSON na GitHub Pages, podaj tutaj jego ścieżkę. Potem możesz użyć „Odświeżanie z JSON” z menu.
+      </div>
+
+      <div id="statusBox" class="status info"></div>
+    </div>
+  </dialog>
+
+  <script>
+    const APP_STORAGE_KEY = "ict-supporter-data-v2";
+    const JSON_URL_STORAGE_KEY = "ict-supporter-json-url-v1";
+
+    const state = {
+      data: {
+        title: "ICTサポーター",
+        groups: [
+          {
+            id: createId(),
+            name: "吹田南小学校",
+            subgroups: [
+              {
+                id: createId(),
+                name: "Ogólne",
+                links: [
+                  {
+                    id: createId(),
+                    title: "Przykładowy link",
+                    url: "https://example.com",
+                    description: "Możesz edytować, usuwać i zmieniać kolejność tego linku."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            id: createId(),
+            name: "青山台中学校",
+            subgroups: [
+              {
+                id: createId(),
+                name: "Ogólne",
+                links: []
+              }
+            ]
+          }
+        ]
+      },
+      editing: {
+        groupId: null,
+        subgroupId: null,
+        linkId: null
+      }
+    };
+
+    const elements = {
+      menuToggle: document.getElementById("menuToggle"),
+      dropdownMenu: document.getElementById("dropdownMenu"),
+      openEditorBtn: document.getElementById("openEditorBtn"),
+      openJsonExportBtn: document.getElementById("openJsonExportBtn"),
+      refreshJsonBtn: document.getElementById("refreshJsonBtn"),
+      openSettingsBtn: document.getElementById("openSettingsBtn"),
+
+      groupsContainer: document.getElementById("groupsContainer"),
+      summaryText: document.getElementById("summaryText"),
+
+      editorDialog: document.getElementById("editorDialog"),
+      editorTitle: document.getElementById("editorTitle"),
+      linkForm: document.getElementById("linkForm"),
+      groupName: document.getElementById("groupName"),
+      subgroupName: document.getElementById("subgroupName"),
+      linkTitle: document.getElementById("linkTitle"),
+      linkUrl: document.getElementById("linkUrl"),
+      linkDescription: document.getElementById("linkDescription"),
+      saveLinkBtn: document.getElementById("saveLinkBtn"),
+      cancelEditBtn: document.getElementById("cancelEditBtn"),
+      groupSuggestions: document.getElementById("groupSuggestions"),
+      subgroupSuggestions: document.getElementById("subgroupSuggestions"),
+
+      jsonDialog: document.getElementById("jsonDialog"),
+      jsonOutput: document.getElementById("jsonOutput"),
+      copyJsonBtn: document.getElementById("copyJsonBtn"),
+      downloadJsonBtn: document.getElementById("downloadJsonBtn"),
+
+      settingsDialog: document.getElementById("settingsDialog"),
+      jsonUrlInput: document.getElementById("jsonUrlInput"),
+      saveJsonUrlBtn: document.getElementById("saveJsonUrlBtn"),
+      loadJsonNowBtn: document.getElementById("loadJsonNowBtn"),
+      statusBox: document.getElementById("statusBox")
+    };
+
+    function createId() {
+      return (crypto.randomUUID ? crypto.randomUUID() : "id-" + Date.now() + "-" + Math.random().toString(16).slice(2));
+    }
+
+    function saveState() {
+      localStorage.setItem(APP_STORAGE_KEY, JSON.stringify(state.data));
+    }
+
+    function loadState() {
+      const raw = localStorage.getItem(APP_STORAGE_KEY);
+      if (!raw) return;
+      try {
+        const parsed = JSON.parse(raw);
+        if (isValidData(parsed)) state.data = normalizeData(parsed);
+      } catch (e) {
+        console.error("Błąd wczytywania localStorage:", e);
+      }
+    }
+
+    function getJsonUrl() {
+      return localStorage.getItem(JSON_URL_STORAGE_KEY) || "./data.json";
+    }
+
+    function saveJsonUrl(url) {
+      localStorage.setItem(JSON_URL_STORAGE_KEY, url);
+    }
+
+    function isValidData(data) {
+      return data && typeof data === "object" && Array.isArray(data.groups);
+    }
+
+    function normalizeData(data) {
+      return {
+        title: data.title || "ICTサポーター",
+        groups: (data.groups || []).map(group => ({
+          id: group.id || createId(),
+          name: group.name || "Bez nazwy grupy",
+          subgroups: (group.subgroups || []).map(subgroup => ({
+            id: subgroup.id || createId(),
+            name: subgroup.name || "Ogólne",
+            links: (subgroup.links || []).map(link => ({
+              id: link.id || createId(),
+              title: link.title || "Bez tytułu",
+              url: link.url || "#",
+              description: link.description || ""
+            }))
+          }))
+        }))
+      };
+    }
+
+    function escapeHtml(text) {
+      const div = document.createElement("div");
+      div.textContent = text ?? "";
+      return div.innerHTML;
+    }
+
+    function countAllLinks() {
+      return state.data.groups.reduce((acc, group) =>
+        acc + group.subgroups.reduce((subAcc, subgroup) => subAcc + subgroup.links.length, 0), 0
+      );
+    }
+
+    function updateSummary() {
+      const groupsCount = state.data.groups.length;
+      const subgroupsCount = state.data.groups.reduce((acc, group) => acc + group.subgroups.length, 0);
+      const linksCount = countAllLinks();
+      elements.summaryText.textContent = `${groupsCount} grup, ${subgroupsCount} podgrup, ${linksCount} linków`;
+    }
+
+    function renderSuggestions() {
+      const groupNames = state.data.groups.map(group => group.name);
+      elements.groupSuggestions.innerHTML = groupNames
+        .map(name => `<option value="${escapeHtml(name)}"></option>`)
+        .join("");
+
+      const subgroupNames = [...new Set(
+        state.data.groups.flatMap(group => group.subgroups.map(subgroup => subgroup.name))
+      )];
+
+      elements.subgroupSuggestions.innerHTML = subgroupNames
+        .map(name => `<option value="${escapeHtml(name)}"></option>`)
+        .join("");
+    }
+
+    function render() {
+      document.title = state.data.title || "ICTサポーター";
+      updateSummary();
+      renderSuggestions();
+
+      if (!state.data.groups.length) {
+        elements.groupsContainer.innerHTML = `
+          <div class="empty-state">
+            <p>Brak grup.</p>
+            <p>Dodaj pierwszy link z menu — grupa i podgrupa utworzą się automatycznie.</p>
+          </div>
+        `;
+        return;
+      }
+
+      elements.groupsContainer.innerHTML = state.data.groups.map(group => {
+        const groupLinksCount = group.subgroups.reduce((acc, subgroup) => acc + subgroup.links.length, 0);
+
+        return `
+          <section class="group-card">
+            <div class="group-header">
+              <div class="group-title-wrap">
+                <h3>${escapeHtml(group.name)}</h3>
+                <div class="group-meta">${group.subgroups.length} podgrup • ${groupLinksCount} linków</div>
+              </div>
+              <div class="link-actions">
+                <button class="small-btn secondary" onclick="openAddForGroup('${group.id}')">Dodaj link</button>
+                <button class="small-btn danger" onclick="deleteGroup('${group.id}')">Usuń grupę</button>
+              </div>
+            </div>
+
+            <div class="subgroups">
+              ${group.subgroups.map(subgroup => `
+                <div class="subgroup-card">
+                  <div class="subgroup-head">
+                    <div>
+                      <h4>${escapeHtml(subgroup.name)}</h4>
+                      <div class="subgroup-meta">${subgroup.links.length} linków</div>
+                    </div>
+                    <div class="link-actions">
+                      <button class="small-btn secondary" onclick="openAddForSubgroup('${group.id}','${subgroup.id}')">Dodaj link</button>
+                      <button class="small-btn danger" onclick="deleteSubgroup('${group.id}','${subgroup.id}')">Usuń podgrupę</button>
+                    </div>
+                  </div>
+
+                  ${
+                    subgroup.links.length
+                      ? `<div class="links-list">
+                          ${subgroup.links.map((link, index) => `
+                            <article class="link-card">
+                              <div class="link-main">
+                                <h5>${escapeHtml(link.title)}</h5>
+                                <div class="link-url">${escapeHtml(link.url)}</div>
+                                <div class="link-desc">${escapeHtml(link.description || "Brak opisu.")}</div>
+                              </div>
+                              <div class="link-actions">
+                                <a class="small-btn success" href="${escapeHtml(link.url)}" target="_blank" rel="noopener noreferrer">Otwórz</a>
+                                <button class="icon-btn secondary" onclick="moveLink('${group.id}','${subgroup.id}','${link.id}',-1)" ${index === 0 ? "disabled" : ""}>↑</button>
+                                <button class="icon-btn secondary" onclick="moveLink('${group.id}','${subgroup.id}','${link.id}',1)" ${index === subgroup.links.length - 1 ? "disabled" : ""}>↓</button>
+                                <button class="small-btn warning" onclick="editLink('${group.id}','${subgroup.id}','${link.id}')">Edytuj</button>
+                                <button class="small-btn danger" onclick="deleteLink('${group.id}','${subgroup.id}','${link.id}')">Usuń</button>
+                              </div>
+                            </article>
+                          `).join("")}
+                        </div>`
+                      : `<div class="empty-state">
+                          <p>Ta podgrupa nie ma jeszcze linków.</p>
+                        </div>`
+                  }
+                </div>
+              `).join("")}
+            </div>
+          </section>
+        `;
+      }).join("");
+    }
+
+    function findGroupByName(name) {
+      return state.data.groups.find(group => group.name.trim().toLowerCase() === name.trim().toLowerCase());
+    }
+
+    function findOrCreateGroup(name) {
+      let group = findGroupByName(name);
+      if (!group) {
+        group = {
+          id: createId(),
+          name: name.trim(),
+          subgroups: []
+        };
+        state.data.groups.push(group);
+      }
+      return group;
+    }
+
+    function findSubgroupByName(group, subgroupName) {
+      return group.subgroups.find(subgroup => subgroup.name.trim().toLowerCase() === subgroupName.trim().toLowerCase());
+    }
+
+    function findOrCreateSubgroup(group, subgroupName) {
+      let subgroup = findSubgroupByName(group, subgroupName);
+      if (!subgroup) {
+        subgroup = {
+          id: createId(),
+          name: subgroupName.trim(),
+          links: []
+        };
+        group.subgroups.push(subgroup);
+      }
+      return subgroup;
+    }
+
+    function resetEditor() {
+      state.editing = { groupId: null, subgroupId: null, linkId: null };
+      elements.editorTitle.textContent = "Dodaj link";
+      elements.saveLinkBtn.textContent = "Zapisz";
+      elements.linkForm.reset();
+    }
+
+    function openDialog(dialog) {
+      if (typeof dialog.showModal === "function") {
+        dialog.showModal();
+      }
+    }
+
+    function closeDialog(dialog) {
+      if (dialog.open) dialog.close();
+    }
+
+    function fillEditorDefaults(groupName = "", subgroupName = "") {
+      elements.groupName.value = groupName;
+      elements.subgroupName.value = subgroupName;
+    }
+
+    function exportJsonString() {
+      return JSON.stringify(state.data, null, 2);
+    }
+
+    function setStatus(message, type = "info") {
+      elements.statusBox.className = `status show ${type}`;
+      elements.statusBox.textContent = message;
+    }
+
+    async function loadFromJson(url = getJsonUrl()) {
+      try {
+        setStatus(`Wczytywanie danych z: ${url}`, "info");
+        const response = await fetch(url, { cache: "no-store" });
+
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}`);
+        }
+
+        const json = await response.json();
+        if (!isValidData(json)) {
+          throw new Error("Nieprawidłowy format JSON");
+        }
+
+        state.data = normalizeData(json);
+        saveState();
+        render();
+        setStatus("Dane zostały odświeżone z JSON.", "success");
+      } catch (error) {
+        console.error(error);
+        setStatus(`Nie udało się wczytać JSON: ${error.message}`, "error");
+      }
+    }
+
+    function buildDownload() {
+      const blob = new Blob([exportJsonString()], { type: "application/json;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "data.json";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    }
+
+    function removeEmptyStructures() {
+      state.data.groups = state.data.groups
+        .map(group => ({
+          ...group,
+          subgroups: group.subgroups.filter(subgroup => subgroup.links.length > 0 || subgroup.name)
+        }))
+        .filter(group => group.subgroups.length > 0 || group.name);
+    }
+
+    elements.menuToggle.addEventListener("click", () => {
+      elements.dropdownMenu.classList.toggle("open");
+    });
+
+    document.addEventListener("click", (event) => {
+      const clickedInside = event.target.closest(".menu-wrap");
+      if (!clickedInside) elements.dropdownMenu.classList.remove("open");
+    });
+
+    elements.openEditorBtn.addEventListener("click", () => {
+      resetEditor();
+      openDialog(elements.editorDialog);
+      elements.dropdownMenu.classList.remove("open");
+    });
+
+    elements.openJsonExportBtn.addEventListener("click", () => {
+      elements.jsonOutput.value = exportJsonString();
+      openDialog(elements.jsonDialog);
+      elements.dropdownMenu.classList.remove("open");
+    });
+
+    elements.refreshJsonBtn.addEventListener("click", async () => {
+      elements.dropdownMenu.classList.remove("open");
+      await loadFromJson();
+    });
+
+    elements.openSettingsBtn.addEventListener("click", () => {
+      elements.jsonUrlInput.value = getJsonUrl();
+      setStatus("Tutaj ustawisz adres pliku JSON.", "info");
+      openDialog(elements.settingsDialog);
+      elements.dropdownMenu.classList.remove("open");
+    });
+
+    document.querySelectorAll("[data-close]").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const dialogId = btn.getAttribute("data-close");
+        closeDialog(document.getElementById(dialogId));
+      });
+    });
+
+    elements.cancelEditBtn.addEventListener("click", () => {
+      resetEditor();
+      closeDialog(elements.editorDialog);
+    });
+
+    elements.linkForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      const groupName = elements.groupName.value.trim();
+      const subgroupName = elements.subgroupName.value.trim();
+      const title = elements.linkTitle.value.trim();
+      const url = elements.linkUrl.value.trim();
+      const description = elements.linkDescription.value.trim();
+
+      if (!groupName || !subgroupName || !title || !url) return;
+
+      if (state.editing.linkId) {
+        const oldGroup = state.data.groups.find(g => g.id === state.editing.groupId);
+        const oldSubgroup = oldGroup?.subgroups.find(sg => sg.id === state.editing.subgroupId);
+        const linkIndex = oldSubgroup?.links.findIndex(link => link.id === state.editing.linkId);
+
+        if (oldSubgroup && linkIndex > -1) {
+          const [existingLink] = oldSubgroup.links.splice(linkIndex, 1);
+
+          const targetGroup = findOrCreateGroup(groupName);
+          const targetSubgroup = findOrCreateSubgroup(targetGroup, subgroupName);
+
+          targetSubgroup.links.push({
+            ...existingLink,
+            title,
+            url,
+            description
+          });
+        }
+      } else {
+        const group = findOrCreateGroup(groupName);
+        const subgroup = findOrCreateSubgroup(group, subgroupName);
+
+        subgroup.links.push({
+          id: createId(),
+          title,
+          url,
+          description
+        });
+      }
+
+      removeEmptyStructures();
+      saveState();
+      render();
+      resetEditor();
+      closeDialog(elements.editorDialog);
+    });
+
+    elements.copyJsonBtn.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(elements.jsonOutput.value);
+        alert("JSON skopiowany do schowka.");
+      } catch {
+        alert("Nie udało się skopiować JSON.");
+      }
+    });
+
+    elements.downloadJsonBtn.addEventListener("click", buildDownload);
+
+    elements.saveJsonUrlBtn.addEventListener("click", () => {
+      const url = elements.jsonUrlInput.value.trim();
+      if (!url) {
+        setStatus("Podaj adres pliku JSON.", "error");
+        return;
+      }
+      saveJsonUrl(url);
+      setStatus("Adres pliku JSON został zapisany.", "success");
+    });
+
+    elements.loadJsonNowBtn.addEventListener("click", async () => {
+      const url = elements.jsonUrlInput.value.trim();
+      if (!url) {
+        setStatus("Podaj adres pliku JSON.", "error");
+        return;
+      }
+      saveJsonUrl(url);
+      await loadFromJson(url);
+    });
+
+    window.openAddForGroup = function(groupId) {
+      resetEditor();
+      const group = state.data.groups.find(g => g.id === groupId);
+      if (!group) return;
+      fillEditorDefaults(group.name, "");
+      openDialog(elements.editorDialog);
+    };
+
+    window.openAddForSubgroup = function(groupId, subgroupId) {
+      resetEditor();
+      const group = state.data.groups.find(g => g.id === groupId);
+      const subgroup = group?.subgroups.find(sg => sg.id === subgroupId);
+      if (!group || !subgroup) return;
+      fillEditorDefaults(group.name, subgroup.name);
+      openDialog(elements.editorDialog);
+    };
+
+    window.editLink = function(groupId, subgroupId, linkId) {
+      const group = state.data.groups.find(g => g.id === groupId);
+      const subgroup = group?.subgroups.find(sg => sg.id === subgroupId);
+      const link = subgroup?.links.find(l => l.id === linkId);
+      if (!group || !subgroup || !link) return;
+
+      state.editing = { groupId, subgroupId, linkId };
+      elements.editorTitle.textContent = "Edytuj link";
+      elements.saveLinkBtn.textContent = "Zapisz zmiany";
+      elements.groupName.value = group.name;
+      elements.subgroupName.value = subgroup.name;
+      elements.linkTitle.value = link.title;
+      elements.linkUrl.value = link.url;
+      elements.linkDescription.value = link.description || "";
+      openDialog(elements.editorDialog);
+    };
+
+    window.deleteLink = function(groupId, subgroupId, linkId) {
+      if (!confirm("Czy na pewno chcesz usunąć ten link?")) return;
+
+      const group = state.data.groups.find(g => g.id === groupId);
+      const subgroup = group?.subgroups.find(sg => sg.id === subgroupId);
+      if (!group || !subgroup) return;
+
+      subgroup.links = subgroup.links.filter(link => link.id !== linkId);
+      group.subgroups = group.subgroups.filter(sg => sg.links.length > 0 || sg.name);
+      state.data.groups = state.data.groups.filter(g => g.subgroups.length > 0 || g.name);
+      saveState();
+      render();
+    };
+
+    window.deleteGroup = function(groupId) {
+      if (!confirm("Czy na pewno chcesz usunąć całą grupę?")) return;
+      state.data.groups = state.data.groups.filter(group => group.id !== groupId);
+      saveState();
+      render();
+    };
+
+    window.deleteSubgroup = function(groupId, subgroupId) {
+      if (!confirm("Czy na pewno chcesz usunąć tę podgrupę?")) return;
+      const group = state.data.groups.find(g => g.id === groupId);
+      if (!group) return;
+      group.subgroups = group.subgroups.filter(subgroup => subgroup.id !== subgroupId);
+      state.data.groups = state.data.groups.filter(g => g.subgroups.length > 0 || g.name);
+      saveState();
+      render();
+    };
+
+    window.moveLink = function(groupId, subgroupId, linkId, direction) {
+      const group = state.data.groups.find(g => g.id === groupId);
+      const subgroup = group?.subgroups.find(sg => sg.id === subgroupId);
+      if (!group || !subgroup) return;
+
+      const index = subgroup.links.findIndex(link => link.id === linkId);
+      if (index === -1) return;
+
+      const newIndex = index + direction;
+      if (newIndex < 0 || newIndex >= subgroup.links.length) return;
+
+      [subgroup.links[index], subgroup.links[newIndex]] = [subgroup.links[newIndex], subgroup.links[index]];
+      saveState();
+      render();
+    };
+
+    loadState();
+    render();
+  </script>
+</body>
+</html>

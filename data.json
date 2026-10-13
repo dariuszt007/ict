@@ -1,5 +1,13 @@
 {
   "title": "ICTサポーター",
+  "ungroupedLinks": [
+    {
+      "id": "1cce37fa-3dba-4663-8b5f-f44e6c72b85f",
+      "title": "Lista nauczycieli",
+      "url": "https://dariuszt007.github.io/suita/",
+      "description": "Możesz edytować, usuwać i zmieniać kolejność tego linku."
+    }
+  ],
   "groups": [
     {
       "id": "8e67483b-85d1-4c84-8a62-1ef44df3159d",
@@ -10,12 +18,6 @@
           "name": "Ogólne",
           "links": [
             {
-              "id": "1cce37fa-3dba-4663-8b5f-f44e6c72b85f",
-              "title": "Lista nauczycieli",
-              "url": "https://dariuszt007.github.io/suita/",
-              "description": "Możesz edytować, usuwać i zmieniać kolejność tego linku."
-            },
-            {
               "id": "fb972e02-a030-4c08-b175-87e2877a3210",
               "title": "Dzwonki",
               "url": "https://dariuszt007.github.io/s05suita",
@@ -23,7 +25,7 @@
             },
             {
               "id": "d9e420a4-8dd9-4b3d-8eed-3c661feefcbd",
-              "title": "Lista uczniow i numery iPad",
+              "title": "Lista uczniow",
               "url": "https://dariuszt007.github.io/s05",
               "description": ""
             }
@@ -38,7 +40,20 @@
         {
           "id": "c1bd763a-77dc-49b3-b490-2a48ef017d70",
           "name": "Ogólne",
-          "links": []
+          "links": [
+            {
+              "id": "50006cb1-e300-4272-af7c-7b02596a96ea",
+              "title": "Lista uczniow",
+              "url": "https://dariuszt007.github.io/j16",
+              "description": ""
+            },
+            {
+              "id": "06c7a29d-14cc-470c-b6a2-19bff1f64162",
+              "title": "Dzwonki",
+              "url": "https://dariuszt007.github.io/j16suita",
+              "description": ""
+            }
+          ]
         }
       ]
     }

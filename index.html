@@ -2,466 +2,598 @@
 <html lang="pl">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>ICTサポーター</title>
   <style>
-    :root {
-      --bg1: #020617;
-      --bg2: #0f172a;
-      --panel: rgba(15, 23, 42, 0.82);
-      --card: rgba(30, 41, 59, 0.88);
-      --border: rgba(148, 163, 184, 0.22);
-      --text: #f8fafc;
-      --muted: #cbd5e1;
-      --accent: #38bdf8;
-      --accent2: #2563eb;
-      --green: #22c55e;
-      --green2: #15803d;
-      --danger: #ef4444;
-      --danger2: #b91c1c;
-      --warning: #f59e0b;
-      --warning2: #d97706;
-      --secondary1: #64748b;
-      --secondary2: #475569;
-      --shadow: 0 22px 55px rgba(0, 0, 0, 0.35);
+    :root{
+      --bg:#0b1220;
+      --bg2:#111827;
+      --panel:rgba(15,23,42,.9);
+      --panel-2:rgba(30,41,59,.92);
+      --card:rgba(30,41,59,.88);
+      --text:#f8fafc;
+      --muted:#cbd5e1;
+      --line:rgba(148,163,184,.18);
+      --accent:#38bdf8;
+      --accent2:#2563eb;
+      --good:#22c55e;
+      --good2:#15803d;
+      --warn:#f59e0b;
+      --warn2:#d97706;
+      --danger:#ef4444;
+      --danger2:#b91c1c;
+      --secondary:#64748b;
+      --secondary2:#475569;
+      --shadow:0 18px 50px rgba(0,0,0,.35);
+      --radius:20px;
     }
 
-    * { box-sizing: border-box; }
-
-    html, body {
-      margin: 0;
-      padding: 0;
-      min-height: 100%;
-      font-family: Inter, Arial, sans-serif;
-      color: var(--text);
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;min-height:100%}
+    body{
+      font-family:Inter,Arial,sans-serif;
+      color:var(--text);
       background:
-        radial-gradient(circle at top left, rgba(56, 189, 248, 0.18), transparent 28%),
-        radial-gradient(circle at top right, rgba(34, 197, 94, 0.10), transparent 24%),
-        linear-gradient(135deg, var(--bg1), var(--bg2) 45%, #111827);
+        radial-gradient(circle at top left, rgba(56,189,248,.14), transparent 28%),
+        radial-gradient(circle at top right, rgba(34,197,94,.08), transparent 24%),
+        linear-gradient(135deg, #020617, var(--bg) 42%, var(--bg2));
     }
 
-    .container {
-      width: min(1240px, calc(100% - 28px));
-      margin: 0 auto;
-      padding: 24px 0 56px;
+    a{color:inherit}
+    button,input,textarea,select{font:inherit}
+
+    .container{
+      width:min(1280px, calc(100% - 24px));
+      margin:0 auto;
+      padding:14px 0 44px;
     }
 
-    .topbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 16px;
-      padding: 18px 20px;
-      border-radius: 24px;
-      background: var(--panel);
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(14px);
-      position: sticky;
-      top: 12px;
-      z-index: 20;
+    .topbar{
+      position:sticky;
+      top:8px;
+      z-index:50;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      padding:16px 18px;
+      border:1px solid var(--line);
+      border-radius:24px;
+      background:rgba(15,23,42,.86);
+      backdrop-filter:blur(14px);
+      box-shadow:var(--shadow);
     }
 
-    .brand h1 {
-      margin: 0;
-      font-size: clamp(1.7rem, 4vw, 2.8rem);
+    .brand{
+      min-width:0;
     }
 
-    .brand p {
-      margin: 6px 0 0;
-      color: var(--muted);
-      font-size: 0.95rem;
+    .brand h1{
+      margin:0;
+      font-size:clamp(1.4rem, 4vw, 2.4rem);
+      line-height:1.1;
+      word-break:break-word;
     }
 
-    .menu-wrap {
-      position: relative;
+    .brand p{
+      margin:6px 0 0;
+      color:var(--muted);
+      font-size:.94rem;
     }
 
-    .menu-btn, .btn, .small-btn, .icon-btn, .close-btn {
-      border: none;
-      color: #fff;
-      cursor: pointer;
-      transition: transform .15s ease, opacity .15s ease, background .2s ease;
+    .menu-wrap{
+      position:relative;
+      flex-shrink:0;
     }
 
-    .menu-btn:hover, .btn:hover, .small-btn:hover, .icon-btn:hover, .close-btn:hover {
-      transform: translateY(-1px);
-      opacity: .96;
+    .menu-btn,.btn,.small-btn,.icon-btn,.close-btn{
+      border:none;
+      color:#fff;
+      cursor:pointer;
+      transition:transform .15s ease, opacity .15s ease, filter .15s ease;
+    }
+    .menu-btn:hover,.btn:hover,.small-btn:hover,.icon-btn:hover,.close-btn:hover{
+      transform:translateY(-1px);
+      filter:brightness(1.03);
     }
 
-    .menu-btn {
-      border-radius: 14px;
-      padding: 12px 18px;
-      font-weight: 700;
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
+    .menu-btn{
+      border-radius:14px;
+      padding:12px 16px;
+      font-weight:700;
+      background:linear-gradient(135deg,var(--accent),var(--accent2));
+      white-space:nowrap;
     }
 
-    .dropdown {
-      position: absolute;
-      right: 0;
-      top: calc(100% + 12px);
-      width: min(360px, calc(100vw - 40px));
-      background: rgba(15, 23, 42, 0.98);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      box-shadow: var(--shadow);
-      padding: 12px;
-      display: none;
-      backdrop-filter: blur(14px);
+    .desktop-dropdown{
+      position:absolute;
+      right:0;
+      top:calc(100% + 10px);
+      width:min(360px, calc(100vw - 24px));
+      background:rgba(15,23,42,.98);
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:12px;
+      box-shadow:var(--shadow);
+      display:none;
     }
 
-    .dropdown.open { display: block; }
+    .desktop-dropdown.open{display:block}
 
-    .dropdown h3 {
-      margin: 4px 8px 10px;
-      font-size: 1rem;
-      color: var(--muted);
-      font-weight: 600;
+    .desktop-dropdown h3,.mobile-menu-sheet h3{
+      margin:4px 8px 10px;
+      color:var(--muted);
+      font-size:.96rem;
+      font-weight:700;
     }
 
-    .menu-list {
-      display: grid;
-      gap: 8px;
+    .menu-list{
+      display:grid;
+      gap:8px;
     }
 
-    .menu-item {
-      width: 100%;
-      text-align: left;
-      border-radius: 12px;
-      padding: 12px 14px;
-      background: rgba(30, 41, 59, 0.9);
-      color: var(--text);
-      border: 1px solid transparent;
-      cursor: pointer;
-      font-size: 0.95rem;
+    .menu-item{
+      width:100%;
+      text-align:left;
+      border:none;
+      border-radius:12px;
+      padding:13px 14px;
+      background:rgba(30,41,59,.95);
+      color:var(--text);
+      border:1px solid transparent;
+      cursor:pointer;
     }
 
-    .menu-item:hover {
-      border-color: var(--accent);
+    .menu-item:hover{
+      border-color:var(--accent);
     }
 
-    .panel {
-      margin-top: 22px;
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: 24px;
-      padding: 22px;
-      backdrop-filter: blur(14px);
-      box-shadow: var(--shadow);
+    .hero{
+      margin-top:18px;
+      padding:22px;
+      border-radius:26px;
+      border:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(56,189,248,.12), rgba(15,23,42,.82));
+      box-shadow:var(--shadow);
     }
 
-    .panel-head {
-      display: flex;
-      justify-content: space-between;
-      gap: 12px;
-      align-items: center;
-      flex-wrap: wrap;
-      margin-bottom: 18px;
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.2fr .8fr;
+      gap:18px;
+      align-items:start;
     }
 
-    .panel-head h2 {
-      margin: 0;
-      font-size: 1.25rem;
+    .hero h2{
+      margin:0 0 8px;
+      font-size:clamp(1.15rem, 2.6vw, 1.7rem);
     }
 
-    .panel-head p {
-      margin: 0;
-      color: var(--muted);
+    .hero p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.65;
     }
 
-    .notice {
-      margin-top: 12px;
-      padding: 12px 14px;
-      border-radius: 14px;
-      background: rgba(15, 23, 42, 0.58);
-      color: var(--muted);
-      border: 1px solid var(--border);
-      line-height: 1.5;
-      font-size: 0.92rem;
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:12px;
     }
 
-    .groups {
-      display: grid;
-      gap: 18px;
-      margin-top: 18px;
+    .stat{
+      background:rgba(15,23,42,.66);
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:16px;
     }
 
-    .group-card, .orphan-card {
-      background: rgba(15, 23, 42, 0.45);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      overflow: hidden;
+    .stat .label{
+      color:var(--muted);
+      font-size:.9rem;
+      margin-bottom:8px;
     }
 
-    .group-header {
-      padding: 18px 18px 12px;
-      background: linear-gradient(180deg, rgba(56, 189, 248, 0.10), transparent);
-      border-bottom: 1px solid rgba(148, 163, 184, 0.12);
-      display: flex;
-      justify-content: space-between;
-      gap: 12px;
-      align-items: center;
-      flex-wrap: wrap;
+    .stat .value{
+      font-size:1.4rem;
+      font-weight:800;
     }
 
-    .group-title-wrap h3 {
-      margin: 0;
-      font-size: 1.25rem;
+    .panel{
+      margin-top:18px;
+      background:var(--panel);
+      border:1px solid var(--line);
+      border-radius:24px;
+      padding:20px;
+      box-shadow:var(--shadow);
     }
 
-    .group-meta {
-      color: var(--muted);
-      font-size: 0.92rem;
-      margin-top: 6px;
+    .panel-head{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-bottom:14px;
     }
 
-    .subgroups {
-      display: grid;
-      gap: 14px;
-      padding: 16px;
+    .panel-head h2{
+      margin:0;
+      font-size:1.2rem;
     }
 
-    .subgroup-card {
-      background: rgba(30, 41, 59, 0.75);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 16px;
+    .panel-head p{
+      margin:6px 0 0;
+      color:var(--muted);
     }
 
-    .subgroup-head {
-      display: flex;
-      justify-content: space-between;
-      gap: 12px;
-      align-items: center;
-      flex-wrap: wrap;
-      margin-bottom: 12px;
+    .notice{
+      margin-top:10px;
+      padding:12px 14px;
+      border-radius:14px;
+      background:rgba(15,23,42,.58);
+      color:var(--muted);
+      border:1px solid var(--line);
+      line-height:1.6;
+      font-size:.92rem;
     }
 
-    .subgroup-head h4 {
-      margin: 0;
-      font-size: 1.05rem;
+    .groups{
+      display:grid;
+      gap:18px;
+      margin-top:18px;
     }
 
-    .subgroup-meta {
-      color: var(--muted);
-      font-size: 0.9rem;
+    .section-card,.group-card{
+      background:rgba(15,23,42,.45);
+      border:1px solid var(--line);
+      border-radius:20px;
+      overflow:hidden;
     }
 
-    .links-list {
-      display: grid;
-      gap: 12px;
+    .group-header{
+      padding:18px;
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      align-items:flex-start;
+      flex-wrap:wrap;
+      background:linear-gradient(180deg, rgba(56,189,248,.08), transparent);
+      border-bottom:1px solid rgba(148,163,184,.10);
     }
 
-    .link-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 14px;
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 12px;
-      align-items: start;
+    .group-title-wrap h3{
+      margin:0;
+      font-size:1.18rem;
     }
 
-    .link-main h5 {
-      margin: 0 0 6px;
-      font-size: 1rem;
+    .group-meta{
+      margin-top:6px;
+      color:var(--muted);
+      font-size:.92rem;
     }
 
-    .link-url {
-      color: #93c5fd;
-      word-break: break-word;
-      font-size: 0.92rem;
-      margin-bottom: 8px;
+    .subgroups{
+      display:grid;
+      gap:14px;
+      padding:16px;
     }
 
-    .link-desc {
-      color: var(--muted);
-      font-size: 0.93rem;
-      line-height: 1.5;
+    .subgroup-card{
+      background:var(--panel-2);
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:15px;
     }
 
-    .link-actions {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-      align-content: start;
+    .subgroup-head{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-bottom:12px;
     }
 
-    .btn, .small-btn, .icon-btn {
-      border-radius: 12px;
-      font-weight: 700;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
+    .subgroup-head h4{
+      margin:0;
+      font-size:1.02rem;
     }
 
-    .btn { padding: 11px 16px; }
-    .small-btn { padding: 9px 12px; font-size: 0.88rem; }
-    .icon-btn { padding: 9px 11px; font-size: 0.88rem; min-width: 42px; }
-
-    .primary { background: linear-gradient(135deg, var(--accent), var(--accent2)); }
-    .success { background: linear-gradient(135deg, var(--green), var(--green2)); }
-    .danger { background: linear-gradient(135deg, var(--danger), var(--danger2)); }
-    .secondary { background: linear-gradient(135deg, var(--secondary1), var(--secondary2)); }
-    .warning { background: linear-gradient(135deg, var(--warning), var(--warning2)); }
-
-    .empty-state {
-      padding: 30px 20px;
-      text-align: center;
-      border: 1px dashed var(--border);
-      border-radius: 18px;
-      color: var(--muted);
-      background: rgba(15, 23, 42, 0.32);
+    .subgroup-meta{
+      margin-top:6px;
+      color:var(--muted);
+      font-size:.9rem;
     }
 
-    dialog {
-      width: min(760px, calc(100% - 24px));
-      border: 1px solid var(--border);
-      border-radius: 24px;
-      background: rgba(15, 23, 42, 0.98);
-      color: var(--text);
-      box-shadow: var(--shadow);
-      padding: 0;
+    .links-list{
+      display:grid;
+      gap:12px;
     }
 
-    dialog::backdrop {
-      background: rgba(2, 6, 23, 0.7);
-      backdrop-filter: blur(3px);
+    .link-card{
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:14px;
+      display:grid;
+      grid-template-columns:1fr auto;
+      gap:12px;
     }
 
-    .modal-content {
-      padding: 22px;
+    .link-main h5{
+      margin:0 0 6px;
+      font-size:1rem;
     }
 
-    .modal-head {
-      display: flex;
-      justify-content: space-between;
-      gap: 12px;
-      align-items: center;
-      margin-bottom: 18px;
+    .link-url{
+      margin-bottom:8px;
+      color:#93c5fd;
+      word-break:break-word;
+      font-size:.92rem;
     }
 
-    .modal-head h2 {
-      margin: 0;
-      font-size: 1.25rem;
+    .link-desc{
+      color:var(--muted);
+      font-size:.93rem;
+      line-height:1.55;
     }
 
-    .close-btn {
-      background: transparent;
-      color: var(--muted);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 10px 12px;
+    .link-actions{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+      align-content:start;
     }
 
-    .form-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
+    .btn,.small-btn,.icon-btn{
+      border-radius:12px;
+      font-weight:700;
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
     }
 
-    .full { grid-column: 1 / -1; }
+    .btn{padding:11px 16px}
+    .small-btn{padding:9px 12px;font-size:.88rem}
+    .icon-btn{padding:9px 11px;font-size:.88rem;min-width:42px}
 
-    .field {
-      display: grid;
-      gap: 8px;
-    }
+    .primary{background:linear-gradient(135deg,var(--accent),var(--accent2))}
+    .success{background:linear-gradient(135deg,var(--good),var(--good2))}
+    .warning{background:linear-gradient(135deg,var(--warn),var(--warn2))}
+    .danger{background:linear-gradient(135deg,var(--danger),var(--danger2))}
+    .secondary{background:linear-gradient(135deg,var(--secondary),var(--secondary2))}
 
-    .field label {
-      color: var(--muted);
-      font-size: 0.92rem;
-    }
-
-    .field input, .field textarea, .field select {
-      width: 100%;
-      border: 1px solid var(--border);
-      background: rgba(15, 23, 42, 0.9);
-      color: var(--text);
-      border-radius: 12px;
-      padding: 12px 14px;
-      font-size: 0.95rem;
-      outline: none;
+    .empty-state{
+      padding:26px 18px;
+      text-align:center;
+      border:1px dashed var(--line);
+      border-radius:18px;
+      color:var(--muted);
+      background:rgba(15,23,42,.28);
     }
 
-    .field textarea {
-      min-height: 96px;
-      resize: vertical;
+    dialog{
+      width:min(780px, calc(100% - 16px));
+      border:1px solid var(--line);
+      border-radius:24px;
+      background:rgba(15,23,42,.99);
+      color:var(--text);
+      box-shadow:var(--shadow);
+      padding:0;
     }
 
-    .field input:focus, .field textarea:focus, .field select:focus {
-      border-color: var(--accent);
-      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.18);
+    dialog::backdrop{
+      background:rgba(2,6,23,.72);
+      backdrop-filter:blur(3px);
     }
 
-    .modal-actions {
-      margin-top: 18px;
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
+    .modal-content{padding:20px}
+    .modal-head{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      margin-bottom:18px;
+    }
+    .modal-head h2{
+      margin:0;
+      font-size:1.18rem;
     }
 
-    .json-box {
-      width: 100%;
-      min-height: 320px;
-      padding: 14px;
-      background: rgba(15, 23, 42, 0.95);
-      color: #e2e8f0;
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-      font-size: 0.9rem;
-      line-height: 1.5;
-      resize: vertical;
+    .close-btn{
+      background:transparent;
+      color:var(--muted);
+      border:1px solid var(--line);
+      border-radius:12px;
+      padding:10px 12px;
     }
 
-    .helper {
-      margin-top: 12px;
-      color: var(--muted);
-      font-size: 0.92rem;
-      line-height: 1.6;
+    .form-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:14px;
     }
 
-    .status {
-      margin-top: 14px;
-      padding: 12px 14px;
-      border-radius: 14px;
-      font-size: 0.92rem;
-      display: none;
+    .full{grid-column:1 / -1}
+
+    .field{
+      display:grid;
+      gap:8px;
     }
 
-    .status.show { display: block; }
-    .status.info {
-      background: rgba(56, 189, 248, 0.12);
-      color: #bae6fd;
-      border: 1px solid rgba(56, 189, 248, 0.25);
-    }
-    .status.error {
-      background: rgba(239, 68, 68, 0.12);
-      color: #fecaca;
-      border: 1px solid rgba(239, 68, 68, 0.25);
-    }
-    .status.success {
-      background: rgba(34, 197, 94, 0.12);
-      color: #bbf7d0;
-      border: 1px solid rgba(34, 197, 94, 0.25);
+    .field label{
+      color:var(--muted);
+      font-size:.92rem;
     }
 
-    @media (max-width: 900px) {
-      .topbar {
-        flex-direction: column;
-        align-items: flex-start;
+    .field input,.field textarea,.field select{
+      width:100%;
+      border:1px solid var(--line);
+      background:rgba(15,23,42,.92);
+      color:var(--text);
+      border-radius:12px;
+      padding:12px 14px;
+      outline:none;
+    }
+
+    .field textarea{
+      min-height:100px;
+      resize:vertical;
+    }
+
+    .field input:focus,.field textarea:focus,.field select:focus{
+      border-color:var(--accent);
+      box-shadow:0 0 0 3px rgba(56,189,248,.18);
+    }
+
+    .modal-actions{
+      margin-top:18px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .json-box{
+      width:100%;
+      min-height:320px;
+      padding:14px;
+      background:rgba(15,23,42,.95);
+      color:#e2e8f0;
+      border:1px solid var(--line);
+      border-radius:16px;
+      font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+      font-size:.9rem;
+      line-height:1.5;
+      resize:vertical;
+    }
+
+    .helper{
+      margin-top:12px;
+      color:var(--muted);
+      font-size:.92rem;
+      line-height:1.6;
+    }
+
+    .status{
+      margin-top:14px;
+      padding:12px 14px;
+      border-radius:14px;
+      font-size:.92rem;
+      display:none;
+    }
+    .status.show{display:block}
+    .status.info{
+      background:rgba(56,189,248,.12);
+      color:#bae6fd;
+      border:1px solid rgba(56,189,248,.25);
+    }
+    .status.error{
+      background:rgba(239,68,68,.12);
+      color:#fecaca;
+      border:1px solid rgba(239,68,68,.25);
+    }
+    .status.success{
+      background:rgba(34,197,94,.12);
+      color:#bbf7d0;
+      border:1px solid rgba(34,197,94,.25);
+    }
+
+    .mobile-menu-backdrop{
+      position:fixed;
+      inset:0;
+      background:rgba(2,6,23,.55);
+      backdrop-filter:blur(2px);
+      z-index:79;
+      display:none;
+    }
+
+    .mobile-menu-sheet{
+      position:fixed;
+      left:12px;
+      right:12px;
+      bottom:12px;
+      z-index:80;
+      display:none;
+      border:1px solid var(--line);
+      border-radius:22px;
+      background:rgba(15,23,42,.98);
+      box-shadow:var(--shadow);
+      padding:14px;
+      max-height:min(72vh, 640px);
+      overflow:auto;
+    }
+
+    .mobile-menu-sheet.open,
+    .mobile-menu-backdrop.open{
+      display:block;
+    }
+
+    .mobile-menu-top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      margin-bottom:8px;
+    }
+
+    .mobile-menu-top strong{
+      font-size:1rem;
+    }
+
+    @media (max-width: 920px){
+      .hero-grid{grid-template-columns:1fr}
+      .link-card{grid-template-columns:1fr}
+      .link-actions{justify-content:flex-start}
+      .form-grid{grid-template-columns:1fr}
+    }
+
+    @media (max-width: 640px){
+      .container{
+        width:min(100%, calc(100% - 14px));
+        padding-top:8px;
       }
-      .form-grid {
-        grid-template-columns: 1fr;
+
+      .topbar{
+        top:6px;
+        padding:14px;
+        border-radius:20px;
       }
-      .link-card {
-        grid-template-columns: 1fr;
+
+      .brand p{
+        font-size:.88rem;
       }
-      .link-actions {
-        justify-content: flex-start;
+
+      .menu-btn{
+        padding:12px 14px;
+      }
+
+      .desktop-dropdown{
+        display:none !important;
+      }
+
+      .hero,.panel{
+        padding:16px;
+        border-radius:20px;
+      }
+
+      .group-header,.subgroups{
+        padding:14px;
+      }
+
+      .subgroup-card{
+        padding:13px;
+      }
+
+      dialog{
+        width:calc(100% - 12px);
+        max-height:92vh;
+      }
+
+      .modal-content{
+        padding:16px;
       }
     }
   </style>
@@ -471,23 +603,50 @@
     <header class="topbar">
       <div class="brand">
         <h1>ICTサポーター</h1>
-        <p>Grupy, podgrupy i linki poza grupami z eksportem/importem JSON.</p>
+        <p>Profesjonalny panel linków z grupami, podgrupami, sekcją poza grupami oraz obsługą pliku JSON.</p>
       </div>
 
       <div class="menu-wrap">
-        <button class="menu-btn" id="menuToggle">☰ Menu</button>
-        <div class="dropdown" id="dropdownMenu">
+        <button class="menu-btn" id="menuToggle" aria-expanded="false" aria-controls="desktopDropdown mobileMenuSheet">☰ Menu</button>
+
+        <div class="desktop-dropdown" id="desktopDropdown">
           <h3>Akcje</h3>
-          <div class="menu-list">
-            <button class="menu-item" id="openAddLinkBtn">Dodaj link</button>
-            <button class="menu-item" id="openAddGroupBtn">Dodaj grupę</button>
-            <button class="menu-item" id="openJsonExportBtn">Eksport do JSON</button>
-            <button class="menu-item" id="refreshJsonBtn">Odświeżanie z JSON</button>
-            <button class="menu-item" id="openSettingsBtn">Ustawienia JSON</button>
-          </div>
+          <div class="menu-list" id="desktopMenuList"></div>
         </div>
       </div>
     </header>
+
+    <section class="hero">
+      <div class="hero-grid">
+        <div>
+          <h2>Zarządzanie linkami i szkołami w jednym miejscu</h2>
+          <p>
+            Dodawaj nowe grupy, podgrupy, linki poza grupami, eksportuj dane do JSON,
+            odświeżaj z pliku JSON i zmieniaj kolejność elementów. Ta wersja została
+            poprawiona także pod smartfony — menu jest zawsze widoczne i wygodne.
+          </p>
+        </div>
+
+        <div class="stats">
+          <div class="stat">
+            <div class="label">Grupy</div>
+            <div class="value" id="statGroups">0</div>
+          </div>
+          <div class="stat">
+            <div class="label">Podgrupy</div>
+            <div class="value" id="statSubgroups">0</div>
+          </div>
+          <div class="stat">
+            <div class="label">Linki w grupach</div>
+            <div class="value" id="statGroupedLinks">0</div>
+          </div>
+          <div class="stat">
+            <div class="label">Linki poza grupami</div>
+            <div class="value" id="statUngroupedLinks">0</div>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <section class="panel">
       <div class="panel-head">
@@ -498,11 +657,22 @@
       </div>
 
       <div class="notice">
-        Możesz tworzyć grupy, podgrupy oraz linki poza grupami. Linki poza grupami można ręcznie przesuwać i później łatwo przenosić do grupy.
+        Na telefonie menu otwiera się jako duży dolny panel, dzięki czemu jest dobrze widoczne.
+        Linki poza grupami możesz układać ręcznie i później łatwo przenosić do dowolnej grupy.
       </div>
 
       <div id="groupsContainer" class="groups"></div>
     </section>
+  </div>
+
+  <div class="mobile-menu-backdrop" id="mobileMenuBackdrop"></div>
+  <div class="mobile-menu-sheet" id="mobileMenuSheet" aria-hidden="true">
+    <div class="mobile-menu-top">
+      <strong>Menu</strong>
+      <button class="close-btn" type="button" id="closeMobileMenuBtn">Zamknij</button>
+    </div>
+    <h3>Szybkie akcje</h3>
+    <div class="menu-list" id="mobileMenuList"></div>
   </div>
 
   <dialog id="linkDialog">
@@ -597,6 +767,10 @@
         <button class="btn success" type="button" id="copyJsonBtn">Kopiuj JSON</button>
         <button class="btn secondary" type="button" id="downloadJsonBtn">Pobierz plik JSON</button>
       </div>
+
+      <div class="helper">
+        Skopiuj zawartość albo pobierz plik <strong>data.json</strong> i wgraj go na GitHub Pages.
+      </div>
     </div>
   </dialog>
 
@@ -618,7 +792,7 @@
       </div>
 
       <div class="helper">
-        Ustaw tutaj ścieżkę do pliku JSON. Możesz potem użyć przycisku odświeżania z menu.
+        Wpisz np. <strong>./data.json</strong>. Po wgraniu nowego pliku możesz użyć odświeżania z menu.
       </div>
 
       <div id="statusBox" class="status info"></div>
@@ -626,7 +800,7 @@
   </dialog>
 
   <script>
-    const APP_STORAGE_KEY = "ict-supporter-data-v3";
+    const APP_STORAGE_KEY = "ict-supporter-final-v1";
     const JSON_URL_STORAGE_KEY = "ict-supporter-json-url-v1";
 
     const state = {
@@ -669,22 +843,25 @@
         mode: null,
         groupId: null,
         subgroupId: null,
-        linkId: null,
-        source: null
+        linkId: null
       }
     };
 
     const el = {
       menuToggle: document.getElementById("menuToggle"),
-      dropdownMenu: document.getElementById("dropdownMenu"),
-      openAddLinkBtn: document.getElementById("openAddLinkBtn"),
-      openAddGroupBtn: document.getElementById("openAddGroupBtn"),
-      openJsonExportBtn: document.getElementById("openJsonExportBtn"),
-      refreshJsonBtn: document.getElementById("refreshJsonBtn"),
-      openSettingsBtn: document.getElementById("openSettingsBtn"),
+      desktopDropdown: document.getElementById("desktopDropdown"),
+      desktopMenuList: document.getElementById("desktopMenuList"),
+      mobileMenuBackdrop: document.getElementById("mobileMenuBackdrop"),
+      mobileMenuSheet: document.getElementById("mobileMenuSheet"),
+      mobileMenuList: document.getElementById("mobileMenuList"),
+      closeMobileMenuBtn: document.getElementById("closeMobileMenuBtn"),
 
       groupsContainer: document.getElementById("groupsContainer"),
       summaryText: document.getElementById("summaryText"),
+      statGroups: document.getElementById("statGroups"),
+      statSubgroups: document.getElementById("statSubgroups"),
+      statGroupedLinks: document.getElementById("statGroupedLinks"),
+      statUngroupedLinks: document.getElementById("statUngroupedLinks"),
 
       linkDialog: document.getElementById("linkDialog"),
       linkDialogTitle: document.getElementById("linkDialogTitle"),
@@ -717,6 +894,14 @@
       loadJsonNowBtn: document.getElementById("loadJsonNowBtn"),
       statusBox: document.getElementById("statusBox")
     };
+
+    const MENU_ACTIONS = [
+      { id: "add-link", label: "Dodaj link" },
+      { id: "add-group", label: "Dodaj grupę" },
+      { id: "export-json", label: "Eksport do JSON" },
+      { id: "refresh-json", label: "Odświeżanie z JSON" },
+      { id: "settings-json", label: "Ustawienia JSON" }
+    ];
 
     function createId() {
       return crypto.randomUUID ? crypto.randomUUID() : "id-" + Date.now() + "-" + Math.random().toString(16).slice(2);
@@ -788,6 +973,35 @@
       if (dialog.open) dialog.close();
     }
 
+    function isMobileView() {
+      return window.matchMedia("(max-width: 640px)").matches;
+    }
+
+    function openMenu() {
+      if (isMobileView()) {
+        el.mobileMenuBackdrop.classList.add("open");
+        el.mobileMenuSheet.classList.add("open");
+        el.mobileMenuSheet.setAttribute("aria-hidden", "false");
+      } else {
+        el.desktopDropdown.classList.add("open");
+      }
+      el.menuToggle.setAttribute("aria-expanded", "true");
+    }
+
+    function closeMenu() {
+      el.desktopDropdown.classList.remove("open");
+      el.mobileMenuBackdrop.classList.remove("open");
+      el.mobileMenuSheet.classList.remove("open");
+      el.mobileMenuSheet.setAttribute("aria-hidden", "true");
+      el.menuToggle.setAttribute("aria-expanded", "false");
+    }
+
+    function toggleMenu() {
+      const open = el.desktopDropdown.classList.contains("open") || el.mobileMenuSheet.classList.contains("open");
+      if (open) closeMenu();
+      else openMenu();
+    }
+
     function countGroupedLinks() {
       return state.data.groups.reduce((acc, group) =>
         acc + group.subgroups.reduce((subAcc, subgroup) => subAcc + subgroup.links.length, 0), 0
@@ -798,7 +1012,11 @@
       return state.data.groups.reduce((acc, group) => acc + group.subgroups.length, 0);
     }
 
-    function updateSummary() {
+    function updateStats() {
+      el.statGroups.textContent = state.data.groups.length;
+      el.statSubgroups.textContent = countSubgroups();
+      el.statGroupedLinks.textContent = countGroupedLinks();
+      el.statUngroupedLinks.textContent = state.data.ungroupedLinks.length;
       el.summaryText.textContent =
         `${state.data.groups.length} grup, ${countSubgroups()} podgrup, ${countGroupedLinks()} linków w grupach, ${state.data.ungroupedLinks.length} linków poza grupami`;
     }
@@ -817,9 +1035,17 @@
         .join("");
     }
 
+    function renderMenuButtons(container) {
+      container.innerHTML = MENU_ACTIONS.map(action => `
+        <button class="menu-item" type="button" data-menu-action="${action.id}">
+          ${action.label}
+        </button>
+      `).join("");
+    }
+
     function renderUngroupedSection() {
       return `
-        <section class="orphan-card">
+        <section class="section-card">
           <div class="group-header">
             <div class="group-title-wrap">
               <h3>Linki poza grupami</h3>
@@ -935,8 +1161,10 @@
 
     function render() {
       document.title = state.data.title || "ICTサポーター";
-      updateSummary();
+      updateStats();
       renderSuggestions();
+      renderMenuButtons(el.desktopMenuList);
+      renderMenuButtons(el.mobileMenuList);
       el.groupsContainer.innerHTML = renderUngroupedSection() + renderGroupsSection();
     }
 
@@ -979,7 +1207,7 @@
     }
 
     function resetLinkForm() {
-      state.editing = { mode: null, groupId: null, subgroupId: null, linkId: null, source: null };
+      state.editing = { mode: null, groupId: null, subgroupId: null, linkId: null };
       el.linkDialogTitle.textContent = "Dodaj link";
       el.saveLinkBtn.textContent = "Zapisz";
       el.linkForm.reset();
@@ -1010,11 +1238,7 @@
     function findOrCreateGroup(name) {
       let group = findGroupByName(name);
       if (!group) {
-        group = {
-          id: createId(),
-          name: name.trim(),
-          subgroups: []
-        };
+        group = { id: createId(), name: name.trim(), subgroups: [] };
         state.data.groups.push(group);
       }
       return group;
@@ -1027,23 +1251,10 @@
     function findOrCreateSubgroup(group, name) {
       let subgroup = findSubgroupByName(group, name);
       if (!subgroup) {
-        subgroup = {
-          id: createId(),
-          name: name.trim(),
-          links: []
-        };
+        subgroup = { id: createId(), name: name.trim(), links: [] };
         group.subgroups.push(subgroup);
       }
       return subgroup;
-    }
-
-    function cleanupEmptySubgroupsAndGroups() {
-      state.data.groups = state.data.groups
-        .map(group => ({
-          ...group,
-          subgroups: group.subgroups.filter(subgroup => subgroup.name || subgroup.links.length > 0)
-        }))
-        .filter(group => group.name || group.subgroups.length > 0);
     }
 
     function moveItem(array, fromIndex, toIndex) {
@@ -1052,50 +1263,56 @@
       array.splice(toIndex, 0, item);
     }
 
-    el.menuToggle.addEventListener("click", () => {
-      el.dropdownMenu.classList.toggle("open");
-    });
+    function executeMenuAction(actionId) {
+      closeMenu();
+
+      if (actionId === "add-link") {
+        resetLinkForm();
+        openDialog(el.linkDialog);
+      }
+
+      if (actionId === "add-group") {
+        el.groupForm.reset();
+        openDialog(el.groupDialog);
+      }
+
+      if (actionId === "export-json") {
+        el.jsonOutput.value = exportJsonString();
+        openDialog(el.jsonDialog);
+      }
+
+      if (actionId === "refresh-json") {
+        loadFromJson();
+      }
+
+      if (actionId === "settings-json") {
+        el.jsonUrlInput.value = getJsonUrl();
+        setStatus("Tutaj ustawisz adres pliku JSON.", "info");
+        openDialog(el.settingsDialog);
+      }
+    }
+
+    el.menuToggle.addEventListener("click", toggleMenu);
+    el.closeMobileMenuBtn.addEventListener("click", closeMenu);
+    el.mobileMenuBackdrop.addEventListener("click", closeMenu);
 
     document.addEventListener("click", (event) => {
-      if (!event.target.closest(".menu-wrap")) {
-        el.dropdownMenu.classList.remove("open");
+      if (!isMobileView()) {
+        const inside = event.target.closest(".menu-wrap");
+        if (!inside) el.desktopDropdown.classList.remove("open");
       }
     });
 
-    el.openAddLinkBtn.addEventListener("click", () => {
-      resetLinkForm();
-      openDialog(el.linkDialog);
-      el.dropdownMenu.classList.remove("open");
+    document.addEventListener("click", (event) => {
+      const actionBtn = event.target.closest("[data-menu-action]");
+      if (!actionBtn) return;
+      executeMenuAction(actionBtn.getAttribute("data-menu-action"));
     });
 
-    el.openAddGroupBtn.addEventListener("click", () => {
-      el.groupForm.reset();
-      openDialog(el.groupDialog);
-      el.dropdownMenu.classList.remove("open");
-    });
-
-    el.openJsonExportBtn.addEventListener("click", () => {
-      el.jsonOutput.value = exportJsonString();
-      openDialog(el.jsonDialog);
-      el.dropdownMenu.classList.remove("open");
-    });
-
-    el.refreshJsonBtn.addEventListener("click", async () => {
-      el.dropdownMenu.classList.remove("open");
-      await loadFromJson();
-    });
-
-    el.openSettingsBtn.addEventListener("click", () => {
-      el.jsonUrlInput.value = getJsonUrl();
-      setStatus("Tutaj ustawisz adres pliku JSON.", "info");
-      openDialog(el.settingsDialog);
-      el.dropdownMenu.classList.remove("open");
-    });
+    window.addEventListener("resize", closeMenu);
 
     document.querySelectorAll("[data-close]").forEach(btn => {
-      btn.addEventListener("click", () => {
-        closeDialog(document.getElementById(btn.dataset.close));
-      });
+      btn.addEventListener("click", () => closeDialog(document.getElementById(btn.dataset.close)));
     });
 
     el.cancelLinkBtn.addEventListener("click", () => {
@@ -1126,7 +1343,6 @@
         const index = state.data.ungroupedLinks.findIndex(link => link.id === state.editing.linkId);
         if (index > -1) {
           const existing = state.data.ungroupedLinks[index];
-
           if (placement === "ungrouped") {
             state.data.ungroupedLinks[index] = { ...existing, title, url, description };
           } else {
@@ -1143,7 +1359,6 @@
 
         if (sourceSubgroup && sourceIndex > -1) {
           const [existing] = sourceSubgroup.links.splice(sourceIndex, 1);
-
           if (placement === "ungrouped") {
             state.data.ungroupedLinks.push({ ...existing, title, url, description });
           } else {
@@ -1154,25 +1369,14 @@
         }
       } else {
         if (placement === "ungrouped") {
-          state.data.ungroupedLinks.push({
-            id: createId(),
-            title,
-            url,
-            description
-          });
+          state.data.ungroupedLinks.push({ id: createId(), title, url, description });
         } else {
           const targetGroup = findOrCreateGroup(groupName);
           const targetSubgroup = findOrCreateSubgroup(targetGroup, subgroupName);
-          targetSubgroup.links.push({
-            id: createId(),
-            title,
-            url,
-            description
-          });
+          targetSubgroup.links.push({ id: createId(), title, url, description });
         }
       }
 
-      cleanupEmptySubgroupsAndGroups();
       saveState();
       render();
       resetLinkForm();
@@ -1193,9 +1397,7 @@
       state.data.groups.push({
         id: createId(),
         name,
-        subgroups: firstSubgroup
-          ? [{ id: createId(), name: firstSubgroup, links: [] }]
-          : []
+        subgroups: firstSubgroup ? [{ id: createId(), name: firstSubgroup, links: [] }] : []
       });
 
       saveState();
@@ -1267,9 +1469,8 @@
     window.editUngroupedLink = function(linkId) {
       const link = state.data.ungroupedLinks.find(item => item.id === linkId);
       if (!link) return;
-
       resetLinkForm();
-      state.editing = { mode: "edit-ungrouped", groupId: null, subgroupId: null, linkId, source: "ungrouped" };
+      state.editing = { mode: "edit-ungrouped", groupId: null, subgroupId: null, linkId };
       el.linkDialogTitle.textContent = "Edytuj link poza grupą";
       el.saveLinkBtn.textContent = "Zapisz zmiany";
       el.placementType.value = "ungrouped";
@@ -1285,9 +1486,8 @@
       const subgroup = findSubgroupById(group, subgroupId);
       const link = subgroup?.links.find(item => item.id === linkId);
       if (!group || !subgroup || !link) return;
-
       resetLinkForm();
-      state.editing = { mode: "edit-grouped", groupId, subgroupId, linkId, source: "grouped" };
+      state.editing = { mode: "edit-grouped", groupId, subgroupId, linkId };
       el.linkDialogTitle.textContent = "Edytuj link w grupie";
       el.saveLinkBtn.textContent = "Zapisz zmiany";
       el.placementType.value = "grouped";
@@ -1343,9 +1543,8 @@
     window.moveUngroupedToGroupPrompt = function(linkId) {
       const link = state.data.ungroupedLinks.find(item => item.id === linkId);
       if (!link) return;
-
       resetLinkForm();
-      state.editing = { mode: "edit-ungrouped", groupId: null, subgroupId: null, linkId, source: "ungrouped" };
+      state.editing = { mode: "edit-ungrouped", groupId: null, subgroupId: null, linkId };
       el.linkDialogTitle.textContent = "Przenieś link do grupy";
       el.saveLinkBtn.textContent = "Przenieś";
       el.placementType.value = "grouped";

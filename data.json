@@ -1,0 +1,34 @@
+{
+  "title": "ICTサポーター",
+  "groups": [
+    {
+      "id": "group-1",
+      "name": "吹田南小学校",
+      "subgroups": [
+        {
+          "id": "sub-1",
+          "name": "Ogólne",
+          "links": [
+            {
+              "id": "link-1",
+              "title": "Strona główna",
+              "url": "https://example.com",
+              "description": "Opis linku"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "group-2",
+      "name": "青山台中学校",
+      "subgroups": [
+        {
+          "id": "sub-2",
+          "name": "Dokumenty",
+          "links": []
+        }
+      ]
+    }
+  ]
+}

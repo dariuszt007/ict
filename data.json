@@ -18,15 +18,15 @@
           "name": "Ogólne",
           "links": [
             {
-              "id": "fb972e02-a030-4c08-b175-87e2877a3210",
-              "title": "Dzwonki",
-              "url": "https://dariuszt007.github.io/s05suita",
-              "description": ""
-            },
-            {
               "id": "d9e420a4-8dd9-4b3d-8eed-3c661feefcbd",
               "title": "Lista uczniow",
               "url": "https://dariuszt007.github.io/s05",
+              "description": ""
+            },
+            {
+              "id": "fb972e02-a030-4c08-b175-87e2877a3210",
+              "title": "Dzwonki",
+              "url": "https://dariuszt007.github.io/s05suita",
               "description": ""
             }
           ]

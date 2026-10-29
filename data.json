@@ -18,7 +18,13 @@
               "id": "fb972e02-a030-4c08-b175-87e2877a3210",
               "title": "Dzwonki",
               "url": "https://dariuszt007.github.io/s05suita"
-            },
+            }
+          ]
+        },
+        {
+          "id": "bb256653-a271-41c4-b8f9-4b8549762251",
+          "name": "Nauka",
+          "links": [
             {
               "id": "972425eb-ee82-4d1b-a896-f8dc28412243",
               "title": "学校だより",
@@ -46,11 +52,22 @@
               "id": "06c7a29d-14cc-470c-b6a2-19bff1f64162",
               "title": "Dzwonki",
               "url": "https://dariuszt007.github.io/j16suita"
-            },
+            }
+          ]
+        },
+        {
+          "id": "03728b92-9d86-4a87-8dc7-4d414cbe38e1",
+          "name": "Nauka",
+          "links": [
             {
               "id": "34b343ab-68de-43d4-8c9a-330e85979e12",
               "title": "学校だより",
               "url": "https://rebrand.ly/j16suita"
+            },
+            {
+              "id": "294e3ae1-c435-4db3-b050-f0929951f183",
+              "title": "Life is Tech",
+              "url": "https://lifeistech-lesson.jp/"
             }
           ]
         }
@@ -69,6 +86,6 @@
       "url": "https://dariuszt007.github.io/ictcalendar/admin.html"
     }
   ],
-  "currentGroupId": "__outside__",
-  "currentSubgroupId": null
+  "currentGroupId": "62417602-bd20-4129-a954-88e58f91fb3d",
+  "currentSubgroupId": "c1bd763a-77dc-49b3-b490-2a48ef017d70"
 }

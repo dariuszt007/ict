@@ -705,6 +705,68 @@
       .modal{
         border-radius:24px;
       }
+
+      <!-- POCZATEK -->
+
+
+.action-btn{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-width:0;
+}
+
+.desktop-label{
+  display:inline;
+}
+
+.mobile-label{
+  display:none;
+}
+
+@media (max-width:640px){
+  .top-actions{
+    display:flex;
+    flex-wrap:nowrap;
+    gap:8px;
+    overflow-x:auto;
+    overflow-y:hidden;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+  }
+
+  .top-actions::-webkit-scrollbar{
+    display:none;
+  }
+
+  .top-actions .action-btn{
+    flex:0 0 auto;
+    width:48px;
+    height:48px;
+    padding:0;
+    border-radius:16px;
+  }
+
+  .desktop-label{
+    display:none;
+  }
+
+  .mobile-label{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    font-size:20px;
+    font-weight:800;
+    line-height:1;
+  }
+}
+
+    
+    <!-- KONIEC -->
+
+
+
+      
     }
   </style>
 </head>
@@ -725,11 +787,49 @@
         <input id="searchInput" class="search" type="text" placeholder="Szukaj po tytule..." />
 
         <div class="top-actions">
+
+
+
+          <button id="addLinkBtn" class="btn-primary action-btn" aria-label="Dodaj link" title="Dodaj link">
+  <span class="desktop-label">Dodaj link</span>
+  <span class="mobile-label">+</span>
+</button>
+
+<button id="addManyBtn" class="btn-primary action-btn" aria-label="Dodaj wiele" title="Dodaj wiele">
+  <span class="desktop-label">Dodaj wiele</span>
+  <span class="mobile-label">≡</span>
+</button>
+
+<button id="addGroupBtn" class="btn-primary action-btn" aria-label="Dodaj grupę" title="Dodaj grupę">
+  <span class="desktop-label">Dodaj grupę</span>
+  <span class="mobile-label">▣</span>
+</button>
+
+<button id="editGroupBtn" class="btn-primary action-btn" aria-label="Edytuj grupę" title="Edytuj grupę">
+  <span class="desktop-label">Edytuj grupę</span>
+  <span class="mobile-label">✎</span>
+</button>
+
+<button id="jsonBtn" class="btn-primary action-btn" aria-label="JSON" title="JSON">
+  <span class="desktop-label">JSON</span>
+  <span class="mobile-label">{}</span>
+</button>
+
+
+
+
+
+
+
+          <!--
           <button id="addLinkBtn" class="btn-primary">Dodaj link</button>
           <button id="addManyBtn" class="btn-soft">Dodaj wiele</button>
           <button id="addGroupBtn" class="btn-soft">Dodaj grupę</button>
           <button id="editGroupBtn" class="btn-soft">Edytuj grupę</button>
           <button id="jsonBtn" class="btn-orange">JSON</button>
+          -->
+
+      
         </div>
       </div>
     </div>

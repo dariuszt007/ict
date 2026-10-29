@@ -84,8 +84,13 @@
       "id": "a6d2d5da-2c2e-4b21-8d93-c7b77ddf1cb4",
       "title": "Kalendarz ICT",
       "url": "https://dariuszt007.github.io/ictcalendar/admin.html"
+    },
+    {
+      "id": "f48f0954-21ae-45f3-92a4-82f3015e5d34",
+      "title": "Superhuman",
+      "url": "https://docs.superhuman.com/docs#OAuth2Success"
     }
   ],
-  "currentGroupId": "62417602-bd20-4129-a954-88e58f91fb3d",
-  "currentSubgroupId": "c1bd763a-77dc-49b3-b490-2a48ef017d70"
+  "currentGroupId": "__outside__",
+  "currentSubgroupId": null
 }

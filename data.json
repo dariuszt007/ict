@@ -62,8 +62,13 @@
       "id": "c42a28e1-67a3-4608-8110-2f4df4d04f25",
       "title": "Nauczyciele",
       "url": "https://dariuszt007.github.io/suita/"
+    },
+    {
+      "id": "a6d2d5da-2c2e-4b21-8d93-c7b77ddf1cb4",
+      "title": "Kalendarz ICT",
+      "url": "https://dariuszt007.github.io/ictcalendar/admin.html"
     }
   ],
-  "currentGroupId": "8e67483b-85d1-4c84-8a62-1ef44df3159d",
-  "currentSubgroupId": "91aa2a50-88bf-4897-9955-2b93f2140655"
+  "currentGroupId": "__outside__",
+  "currentSubgroupId": null
 }

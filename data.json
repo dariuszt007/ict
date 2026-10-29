@@ -72,6 +72,34 @@
           ]
         }
       ]
+    },
+    {
+      "id": "834123d0-2455-4030-ba0a-1ca16d355dfa",
+      "name": "UCHIDA",
+      "collapsedSubgroups": false,
+      "subgroups": [
+        {
+          "id": "a4dbeb17-d3db-4a63-a7d0-d1be44a43c7f",
+          "name": "Bez podgrupy",
+          "links": [
+            {
+              "id": "ae4f4235-06bd-4f3d-814f-7fdc9a201fae",
+              "title": "JobCAN",
+              "url": "https://ssl.jobcan.jp/login/mb-employee-global?redirect_to=%2Fm%2Findex"
+            },
+            {
+              "id": "0c292ee9-69a2-48b2-9497-1a93dd0c0b0d",
+              "title": "inQube",
+              "url": "https://uchida-inqube.cybozu.com/login?redirect=https%3A%2F%2Fuchida%2Dinqube%2Ecybozu%2Ecom%2Fo%2Fag%2Ecgi%3Fpage%3DDBView%26did%3D3740"
+            },
+            {
+              "id": "61d5651d-5a4a-4a90-8c52-a6cd057f8118",
+              "title": "Zmiana Planu",
+              "url": "https://forms.cloud.microsoft/pages/responsepage.aspx?id=esRdBKHVT0GgB3zbHj8957w1wnwOVbdGjOVbop9oMXRUNlFPMkExVVZVUEFBUEVRTUQ0NElJMk9JNS4u"
+            }
+          ]
+        }
+      ]
     }
   ],
   "outsideLinks": [
@@ -91,6 +119,6 @@
       "url": "https://docs.superhuman.com/docs#OAuth2Success"
     }
   ],
-  "currentGroupId": "__outside__",
-  "currentSubgroupId": null
+  "currentGroupId": "834123d0-2455-4030-ba0a-1ca16d355dfa",
+  "currentSubgroupId": "a4dbeb17-d3db-4a63-a7d0-d1be44a43c7f"
 }

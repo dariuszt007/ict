@@ -29,6 +29,16 @@
               "id": "972425eb-ee82-4d1b-a896-f8dc28412243",
               "title": "学校だより",
               "url": "https://rebrand.ly/s05suita"
+            },
+            {
+              "id": "0bdd5fdd-c7c4-45e4-8833-aac77f845dd5",
+              "title": "パソコンクラブ",
+              "url": "https://padlet.com/dariuszaleksander/padlet-1wc3r0bnbw00yosu"
+            },
+            {
+              "id": "4fa34602-0da7-4b40-802c-3dc680988e33",
+              "title": "クイズ",
+              "url": "https://padlet.com/dariuszaleksander/padlet-ohjplxlxa4d8mjb8"
             }
           ]
         }
@@ -52,11 +62,6 @@
               "id": "06c7a29d-14cc-470c-b6a2-19bff1f64162",
               "title": "Dzwonki",
               "url": "https://dariuszt007.github.io/j16suita"
-            },
-            {
-              "id": "294e3ae1-c435-4db3-b050-f0929951f183",
-              "title": "Life is Tech",
-              "url": "https://lifeistech-lesson.jp/"
             }
           ]
         },
@@ -68,6 +73,16 @@
               "id": "34b343ab-68de-43d4-8c9a-330e85979e12",
               "title": "学校だより",
               "url": "https://rebrand.ly/j16suita"
+            },
+            {
+              "id": "294e3ae1-c435-4db3-b050-f0929951f183",
+              "title": "Life is Tech",
+              "url": "https://lifeistech-lesson.jp/"
+            },
+            {
+              "id": "44f8cdee-8742-4a79-9338-29ab04e28a84",
+              "title": "クイズ",
+              "url": "https://padlet.com/dariuszaleksander/padlet-9i0d5veui2z68uhx"
             }
           ]
         }
@@ -129,6 +144,6 @@
       "url": "https://rebrand.ly/ict3"
     }
   ],
-  "currentGroupId": "834123d0-2455-4030-ba0a-1ca16d355dfa",
-  "currentSubgroupId": "a4dbeb17-d3db-4a63-a7d0-d1be44a43c7f"
+  "currentGroupId": "8e67483b-85d1-4c84-8a62-1ef44df3159d",
+  "currentSubgroupId": "91aa2a50-88bf-4897-9955-2b93f2140655"
 }

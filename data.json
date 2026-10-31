@@ -99,6 +99,39 @@
       ]
     },
     {
+      "id": "696025ca-06e1-42d0-bdd6-5227f9d9e2e4",
+      "name": "学校",
+      "collapsedSubgroups": false,
+      "subgroups": [
+        {
+          "id": "d1ade72b-620e-4dbd-bb78-da2ec53e84cf",
+          "name": "Bez podgrupy",
+          "links": [
+            {
+              "id": "17d54411-3e0e-41ee-8f46-b9834a3e0b62",
+              "title": "PDF編集",
+              "url": "https://tools.pdf24.org/ja/"
+            },
+            {
+              "id": "a985ed52-2115-4c56-84dc-9b03e675f69d",
+              "title": "タイマー",
+              "url": "https://dariuszt007.github.io/timer/"
+            },
+            {
+              "id": "77945227-ea43-4418-b64f-55d744aa2d83",
+              "title": "ルーレット",
+              "url": "https://dariuszt007.github.io/numbers/"
+            },
+            {
+              "id": "06559d9b-17e8-42f3-a217-fc5b6c4f9db0",
+              "title": "スロットマシン",
+              "url": "https://dariuszt007.github.io/kulki_pachinko/"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "id": "834123d0-2455-4030-ba0a-1ca16d355dfa",
       "name": "UCHIDA",
       "collapsedSubgroups": false,
@@ -149,6 +182,6 @@
       "url": "https://rebrand.ly/ict3"
     }
   ],
-  "currentGroupId": "834123d0-2455-4030-ba0a-1ca16d355dfa",
-  "currentSubgroupId": "a4dbeb17-d3db-4a63-a7d0-d1be44a43c7f"
+  "currentGroupId": "696025ca-06e1-42d0-bdd6-5227f9d9e2e4",
+  "currentSubgroupId": "d1ade72b-620e-4dbd-bb78-da2ec53e84cf"
 }

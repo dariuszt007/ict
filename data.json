@@ -173,6 +173,29 @@
           ]
         }
       ]
+    },
+    {
+      "id": "2ba6c817-0118-4818-b01a-a692bc0d7823",
+      "name": "ePUB",
+      "collapsedSubgroups": false,
+      "subgroups": [
+        {
+          "id": "b2706717-9778-4f01-9fd2-216bf24047d4",
+          "name": "Bez podgrupy",
+          "links": [
+            {
+              "id": "dc6d9f2a-fa87-4e88-8c2a-73dc2a11b892",
+              "title": "Reader",
+              "url": "https://dariuszt007.github.io/book/index.html"
+            },
+            {
+              "id": "db5de3a2-2d01-4b41-832d-34fbff398f0b",
+              "title": "Panel administratora",
+              "url": "https://dariuszt007.github.io/book/admin.html"
+            }
+          ]
+        }
+      ]
     }
   ],
   "outsideLinks": [
@@ -192,6 +215,6 @@
       "url": "https://accounts.zoho.jp/signin?servicename=VirtualOffice&signupurl=https://www.zoho.com/mail/signup.html&serviceurl=https://mail.zoho.jp"
     }
   ],
-  "currentGroupId": "__outside__",
-  "currentSubgroupId": null
+  "currentGroupId": "2ba6c817-0118-4818-b01a-a692bc0d7823",
+  "currentSubgroupId": "b2706717-9778-4f01-9fd2-216bf24047d4"
 }

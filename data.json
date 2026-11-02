@@ -80,6 +80,16 @@
               "url": "https://lifeistech-lesson.jp/"
             },
             {
+              "id": "61b10cc2-8a0e-4dfe-9ee2-077bcb23dfdb",
+              "title": "Life is Tech 管理者",
+              "url": "https://prdlitlesson.b2clogin.com/prdlitlesson.onmicrosoft.com/B2C_1A_USER_EXTENSION_RP_SI_TH/oauth2/v2.0/authorize?client_id=b4999852-6607-4df4-b7fe-7465d92f1403&nonce=92091377&redirect_uri=https%3A%2F%2Fteacher.lifeistech-lesson.jp%2Fauth_oidc&response_type=code&scope=b4999852-6607-4df4-b7fe-7465d92f1403+openid+offline_access&state=eyJfcmFpbHMiOnsiZGF0YSI6eyJwcm92aWRlciI6ImF6dXJlX2FkIn0sImV4cCI6IjIwMjYtMTEtMDJUMDM6Mzg6MjAuODY5WiIsInB1ciI6Im9hdXRoX2xvZ2luX3N0YXRlIn19--a001ac2d51e40aac5ac9a860eca610843dc8f5b0"
+            },
+            {
+              "id": "69b31c51-9be9-436e-8919-4a5bff8421ec",
+              "title": "Ligi is Tech 先生",
+              "url": "https://prdlitlesson.b2clogin.com/prdlitlesson.onmicrosoft.com/B2C_1A_USER_EXTENSION_RP_SI_SD/oauth2/v2.0/authorize?client_id=b4999852-6607-4df4-b7fe-7465d92f1403&nonce=84501453&redirect_uri=https%3A%2F%2Fmember.lifeistech-lesson.jp%2Fauth_oidc&response_type=code&scope=b4999852-6607-4df4-b7fe-7465d92f1403+openid+offline_access&state=eyJfcmFpbHMiOnsiZGF0YSI6eyJwcm92aWRlciI6ImF6dXJlX2FkIn0sImV4cCI6IjIwMjYtMTEtMDJUMDM6Mzk6NTYuMzY0WiIsInB1ciI6Im9hdXRoX2xvZ2luX3N0YXRlIn19--95b643cd980b6194a4cf78bc938de50e2297e24e"
+            },
+            {
               "id": "44f8cdee-8742-4a79-9338-29ab04e28a84",
               "title": "クイズ",
               "url": "https://padlet.com/dariuszaleksander/padlet-9i0d5veui2z68uhx"

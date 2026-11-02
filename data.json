@@ -185,8 +185,13 @@
       "id": "7eb02f24-8636-4cf3-a447-a341904c432f",
       "title": "Notion ICT",
       "url": "https://rebrand.ly/ict3"
+    },
+    {
+      "id": "c639cbca-d681-415b-9322-1ecf6f6920f8",
+      "title": "Zoho Mail",
+      "url": "https://accounts.zoho.jp/signin?servicename=VirtualOffice&signupurl=https://www.zoho.com/mail/signup.html&serviceurl=https://mail.zoho.jp"
     }
   ],
-  "currentGroupId": "62417602-bd20-4129-a954-88e58f91fb3d",
-  "currentSubgroupId": "03728b92-9d86-4a87-8dc7-4d414cbe38e1"
+  "currentGroupId": "__outside__",
+  "currentSubgroupId": null
 }

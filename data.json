@@ -205,11 +205,6 @@
   ],
   "outsideLinks": [
     {
-      "id": "fa30230f-8487-475d-afd5-948265f6c886",
-      "title": "Superhuman Kalendarz",
-      "url": "https://docs.superhuman.com/d/Dariuszs-Playground_d7Q0mLxma3s/ICT_su1SRXTZ#_luEFrWDe"
-    },
-    {
       "id": "7eb02f24-8636-4cf3-a447-a341904c432f",
       "title": "Notion ICT",
       "url": "https://rebrand.ly/ict3"
@@ -220,6 +215,6 @@
       "url": "https://accounts.zoho.jp/signin?servicename=VirtualOffice&signupurl=https://www.zoho.com/mail/signup.html&serviceurl=https://mail.zoho.jp"
     }
   ],
-  "currentGroupId": "834123d0-2455-4030-ba0a-1ca16d355dfa",
-  "currentSubgroupId": "a4dbeb17-d3db-4a63-a7d0-d1be44a43c7f"
+  "currentGroupId": "__outside__",
+  "currentSubgroupId": null
 }

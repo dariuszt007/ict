@@ -213,8 +213,13 @@
       "id": "c639cbca-d681-415b-9322-1ecf6f6920f8",
       "title": "Zoho Mail",
       "url": "https://accounts.zoho.jp/signin?servicename=VirtualOffice&signupurl=https://www.zoho.com/mail/signup.html&serviceurl=https://mail.zoho.jp"
+    },
+    {
+      "id": "fdf1e7f4-b1b7-4b4a-af8b-f65b35a199c0",
+      "title": "FotoDruk Pro",
+      "url": "https://dariuszt007.github.io/photo/"
     }
   ],
-  "currentGroupId": "8e67483b-85d1-4c84-8a62-1ef44df3159d",
-  "currentSubgroupId": "91aa2a50-88bf-4897-9955-2b93f2140655"
+  "currentGroupId": "__outside__",
+  "currentSubgroupId": null
 }
